@@ -1,14 +1,12 @@
 import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {GraphCanvasExampleComponent} from './graph-canvas/graph-canvas-example.component';
 import {CanvasDomModule} from 'angular-canvas';
-import {GraphExampleComponent} from './graph-example/graph-example.component';
-import {NgText} from './elements/text';
-import {NgRect} from './elements/rect';
-import {NgLine} from './elements/line';
-import {NgGraph} from './elements/graph';
-import {NgGrid} from './elements/grid';
 import {RouterModule} from '@angular/router';
+
+import {GraphCanvasExampleComponent} from './graph-canvas/graph-canvas-example.component';
+import {GraphExampleComponent} from './graph-example/graph-example.component';
+
+import {NgText, NgRect, NgLine, NgGraph, NgGrid} from './elements';
 
 // @ts-ignore
 @NgModule({
@@ -20,7 +18,8 @@ import {RouterModule} from '@angular/router';
       NgRect,
       NgLine,
       NgGraph,
-      NgGrid]),
+      NgGrid
+    ]),
     RouterModule.forChild([{
       path: '',
       component: GraphExampleComponent

@@ -7,6 +7,27 @@ Angular canvas renderer.
 
 Graph example:
 
+```ts
+@CanvasElement({
+  selector: 'graph-line'
+})
+export class NgGraph implements NgCanvasElement {
+  ...
+}
+```
+
+Register element
+```ts
+imports: [
+    CanvasDomModule.forRoot(
+    [
+      NgGrid,
+      ...
+    ]
+  ),
+```
+
+
 ```html
 <p>Graph example</p>
 
