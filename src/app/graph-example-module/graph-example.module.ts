@@ -9,21 +9,18 @@ import {NgLine} from './elements/line';
 import {NgGraph} from './elements/graph';
 import {NgGrid} from './elements/grid';
 import {RouterModule} from '@angular/router';
-// import {GraphExampleComponent} from './graph-example.component';
-
-CanvasDomModule.registerElements([
-  NgText,
-  NgRect,
-  NgLine,
-  NgGraph,
-  NgGrid]);
 
 // @ts-ignore
 @NgModule({
   declarations: [GraphCanvasExampleComponent, GraphExampleComponent],
   imports: [
     CommonModule,
-    CanvasDomModule,
+    CanvasDomModule.forRoot([
+      NgText,
+      NgRect,
+      NgLine,
+      NgGraph,
+      NgGrid]),
     RouterModule.forChild([{
       path: '',
       component: GraphExampleComponent

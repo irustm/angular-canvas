@@ -20,6 +20,10 @@ import {RouterModule} from '@angular/router';
       {
         path: 'graph',
         loadChildren: () => import('./graph-example-module/graph-example.module').then(m => m.GraphExampleModule)
+      },
+      {
+        path: 'game',
+        loadChildren: () => import('./game/game.module').then(m => m.GameModule)
       }
 
     ])

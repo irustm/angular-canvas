@@ -16,7 +16,10 @@ import {NgComponentClass} from './metadata/metadata-storage';
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class CanvasDomModule {
-  public static registerElements(elements: NgComponentClass[]): CanvasDomModule {
-    return CanvasDomModule;
+  // tslint:disable-next-line:typedef
+  public static forRoot(elements: NgComponentClass[]) {
+    return {
+      ngModule: CanvasDomModule
+    };
   }
 }
