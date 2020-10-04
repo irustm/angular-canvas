@@ -22,4 +22,4 @@ Graph example:
 
 ```
 
-<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/graph-example.png?raw=true" height="250">
+<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/graph-example.png?raw=true">
