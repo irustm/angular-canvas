@@ -62,9 +62,8 @@ export class NgGrid implements NgCanvasElement {
     const deltaX = this.deltaX;
     const step = this.step;
 
-    // TODO move to service
-    const dxPointsCount = Math.floor(Math.abs(deltaX / step)); // Количество точек которые остались за экраном
-    const viewPointsCount = Math.floor(Math.abs(viewHeight / step)); // Количество видимых точек на экране
+    const dxPointsCount = Math.floor(Math.abs(deltaX / step));
+    const viewPointsCount = Math.floor(Math.abs(viewHeight / step));
 
     context.beginPath();
 
