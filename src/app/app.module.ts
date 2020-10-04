@@ -19,7 +19,7 @@ import {RouterModule} from '@angular/router';
       },
       {
         path: 'graph',
-        loadChildren: () => import('./canvas-example/graph-example.module').then(m => m.GraphExampleModule)
+        loadChildren: () => import('./graph-example-module/graph-example.module').then(m => m.GraphExampleModule)
       }
 
     ])
