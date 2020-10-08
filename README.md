@@ -11,7 +11,7 @@ Graph example:
 @CanvasElement({
   selector: 'graph-line'
 })
-export class NgGraph implements NgCanvasElement {
+export class GraphLineElement implements NgCanvasElement {
   ...
 }
 ```
@@ -21,7 +21,7 @@ Register element
 imports: [
     CanvasDomModule.forRoot(
     [
-      NgGrid,
+      GraphLineElement,
       ...
     ]
   ),
