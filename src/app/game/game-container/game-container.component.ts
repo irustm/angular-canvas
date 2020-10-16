@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-game-container',
@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game-container.component.scss']
 })
 export class GameContainerComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {

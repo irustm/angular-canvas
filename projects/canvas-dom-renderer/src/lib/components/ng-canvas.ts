@@ -40,7 +40,7 @@ export class NgCanvas implements NgCanvasElement {
     this.element.style.position = 'absolute';
     this.context = this.element.getContext('2d');
 
-    window.requestAnimationFrame(() => this.draw());
+    window.requestAnimationFrame(time => this.draw(time));
   }
 
   addClass(name): void {
@@ -85,10 +85,11 @@ export class NgCanvas implements NgCanvasElement {
   }
 
   drawAll(): void {
-    window.requestAnimationFrame(() => this.draw());
+    window.requestAnimationFrame(time => this.draw(time));
   }
 
-  draw(): void {
+  // @ts-ignore
+  draw(time: number): void {
     const context = this.context;
     context.clearRect(0, 0, this.element.width, this.element.height);
 
@@ -96,12 +97,13 @@ export class NgCanvas implements NgCanvasElement {
 
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.componentsDrawings.length; i++) {
-      this.componentsDrawings[i].draw(context);
+      this.componentsDrawings[i].draw(context, time);
       needDraw = needDraw || this.componentsDrawings[i].needDraw;
     }
 
     if (needDraw) {
-      window.requestAnimationFrame(() => this.draw());
+      // tslint:disable-next-line:no-shadowed-variable
+      window.requestAnimationFrame(time => this.draw(time));
     }
   }
 }

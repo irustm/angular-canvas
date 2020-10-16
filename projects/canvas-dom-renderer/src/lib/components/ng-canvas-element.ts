@@ -27,5 +27,5 @@ export interface NgCanvasElement {
 
   removeStyle(style: string, flags?: RendererStyleFlags2): void;
 
-  draw(context: CanvasRenderingContext2D): void;
+  draw(context: CanvasRenderingContext2D, time?: number): void;
 }
