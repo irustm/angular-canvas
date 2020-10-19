@@ -1,7 +1,4 @@
-import {RendererStyleFlags2} from '@angular/core';
 import {NgCanvas, NgCanvasElement, CanvasElement} from 'angular-canvas';
-
-const SMOOTH = 10;
 
 const CAT_SPRITES = [`
 000000bb000b00

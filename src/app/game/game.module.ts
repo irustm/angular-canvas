@@ -5,6 +5,8 @@ import { GameCanvasComponent } from './game-canvas/game-canvas.component';
 import {RouterModule} from '@angular/router';
 import {CanvasDomModule} from 'angular-canvas';
 import {NgCat} from './elements';
+import {NgBackground} from './elements/background.element';
+import {NgCactus} from './elements/cactus.element';
 
 
 @NgModule({
@@ -12,7 +14,9 @@ import {NgCat} from './elements';
   imports: [
     CommonModule,
     CanvasDomModule.forRoot([
-      NgCat
+      NgCat,
+      NgBackground,
+      NgCactus
     ]),
     RouterModule.forChild([
       {

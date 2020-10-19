@@ -3,8 +3,6 @@ import {CanvasComponent} from '../../../../projects/canvas-dom-renderer/src/lib/
 import {interval, Subscription} from 'rxjs';
 import {NgCat} from '../elements';
 
-const STEP = 35;
-
 @CanvasComponent
 @Component({
   selector: 'app-game-canvas',
@@ -13,7 +11,7 @@ const STEP = 35;
 })
 export class GameCanvasComponent implements OnInit {
 
-  public unitY = 20;
+  public unitY = 10;
   public unitX = 10;
   public catSpriteIndex = 0;
   public revert = false;
@@ -73,7 +71,7 @@ export class GameCanvasComponent implements OnInit {
       this.catSpriteIndex += d;
     }));
 
-    this.unitY = this.elementRef.nativeElement.offsetHeight - 100;
+    this.unitY =  Math.floor(this.elementRef.nativeElement.offsetHeight / 1.35);
   }
 
   ngOnDestroy() {
