@@ -13,8 +13,8 @@ export class NgCanvas implements NgCanvasElement {
   public set parent(element) {
     // @ts-ignore
     this.resizeObserver = new ResizeObserver(([entry]) => {
-      this.element.width = entry.contentRect.width * 2;
-      this.element.height = entry.contentRect.height * 2;
+      this.element.width = entry.contentRect.width;
+      this.element.height = entry.contentRect.height;
       this.drawAll();
     });
 

@@ -4,7 +4,7 @@ import { GameContainerComponent } from './game-container/game-container.componen
 import { GameCanvasComponent } from './game-canvas/game-canvas.component';
 import {RouterModule} from '@angular/router';
 import {CanvasDomModule} from 'angular-canvas';
-import {NgUnit} from './elements';
+import {NgCat} from './elements';
 
 
 @NgModule({
@@ -12,7 +12,7 @@ import {NgUnit} from './elements';
   imports: [
     CommonModule,
     CanvasDomModule.forRoot([
-      NgUnit
+      NgCat
     ]),
     RouterModule.forChild([
       {

@@ -78,106 +78,64 @@ function getColor(s: string){
 }
 
 @CanvasElement({
-  selector: 'unit'
+  selector: 'cat'
 })
-export class NgUnit implements NgCanvasElement {
+export class NgCat implements NgCanvasElement {
   public parent: NgCanvas;
   public needDraw: boolean;
 
   public x: number;
-  public oldX: number;
-  public waypointsX: number[];
-
   public y: number;
-  public w: number;
-  public h: number;
+
   public spriteIndex = 0;
   public revert = false;
-  public fillStyle = 'black';
-
-  private animationBlock = 1;
-
-  appendChild(newChild: any): void {
-  }
-  addClass(name): void {
-  }
-
-  insertBefore(newChild: any, refChild: any): void {
-  }
-
-  removeAttribute(name: string, namespace?: string | null): void {
-  }
-
-  removeChild(oldChild: any): void {
-    this.parent.removeChild(oldChild);
-  }
-
-  removeClass(name: string): void {
-  }
-
-  removeStyle(style: string, flags?: RendererStyleFlags2): void {
-  }
-
-  setNgAttribute(name: string, value: string, namespace?: string | null): void {
-    this[name] = value;
-
-    this.parent.drawAll();
-  }
+  public rightPressed = false;
+  public leftPressed = false;
+  public downPressed = false;
 
   setNgProperty(name: string, value: any): void {
-    if (name === 'x') {
-      if (this.x) {
-        this.oldX = this.x;
-      }
-      this.x = value;
-
-      // Init data
-      const oldX = this.oldX || 0;
-      this.waypointsX = calcWaypoints(oldX, this.x);
-
-      this.animationBlock = 1;
-    } else {
-
       this[name] = value;
-    }
-
-    this.parent.drawAll();
-  }
-
-  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {
-  }
-
-  setValue(): void {
-
+      this.parent.drawAll();
   }
 
   draw(context: CanvasRenderingContext2D, time: number): void {
-    const x = this.waypointsX[this.animationBlock - 1] || this.waypointsX[this.waypointsX.length - 1];
-    const matrix = CAT_SPRITE_MATRIX[this.spriteIndex];
+    let dx = 0;
 
-    for (let ci = 0; ci < matrix.length; ci++) {
+    if (this.rightPressed && this.parent.element.width > this.x + (SIZE * 14)) {
+      dx = this.downPressed ? 1 : 2;
+    }
+    if (this.leftPressed && 0 < this.x) {
+      dx = this.downPressed ? -1 : -2;
+    }
+
+
+    this.x += dx;
+    let y = this.y;
+
+    const matrix = CAT_SPRITE_MATRIX[this.spriteIndex];
+    let matrixLength = matrix.length;
+
+    // Cat is seat
+    y += 2 * SIZE;
+    matrixLength -= 2;
+
+    if (!this.downPressed && (this.rightPressed || this.leftPressed)) {
+      y -= 2 * SIZE;
+      matrixLength += 2;
+    }
+
+
+    for (let ci = 0; ci < matrixLength; ci++) {
       let rows = matrix[ci];
       if (this.revert) {
           rows = rows.slice().reverse();
       }
+
       for (let cy = 0; cy < rows.length; cy++) {
           context.fillStyle = getColor(rows[cy]);
-          context.fillRect(x + cy * SIZE, this.y + ci * SIZE, SIZE, SIZE);
+          context.fillRect(this.x + cy * SIZE, y + ci * SIZE, SIZE, SIZE);
         }
     }
-
-    this.animationBlock++;
-
-    // this.needDraw = true;
-    this.needDraw = this.animationBlock < SMOOTH;
+    this.needDraw = this.rightPressed || this.leftPressed;
   }
-}
-
-function calcWaypoints(oldX: number, newX: number): number[] {
-  const points = [];
-  for (let j = 0; j < SMOOTH; j++) {
-    const dx = newX - oldX;
-    points.push(newX + dx * j / SMOOTH);
-  }
-  return points;
 }
