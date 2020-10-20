@@ -1,5 +1,5 @@
-import {Component, HostListener, OnInit} from '@angular/core';
-import {CanvasComponent} from 'angular-canvas';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { CanvasComponent } from 'angular-canvas';
 
 // tslint:disable-next-line:typedef
 function getNewData() {
@@ -38,7 +38,6 @@ export class GraphCanvasExampleComponent implements OnInit {
 
   private ctrlPressed: boolean;
 
-
   @HostListener('mousemove', ['$event'])
   private onMouseMove(event: MouseEvent) {
     this.mouseX = event.offsetX;
@@ -51,13 +50,13 @@ export class GraphCanvasExampleComponent implements OnInit {
   private onMouseWheel(event: WheelEvent) {
     event.preventDefault();
     if (this.ctrlPressed === true) {
-      const step = this.step + (event.deltaY / 100);
+      const step = this.step + event.deltaY / 100;
 
       if (step > 0.01) {
         const dxPoints = Math.abs(this.deltaX / this.step);
         const xPoints = Math.abs(this.mouseX / this.step);
         const leftPoints = dxPoints + xPoints;
-        const dx = this.mouseX - (leftPoints * step);
+        const dx = this.mouseX - leftPoints * step;
 
         this.deltaX = dx < 0 ? dx : 0;
         this.step = step;
@@ -65,7 +64,6 @@ export class GraphCanvasExampleComponent implements OnInit {
     } else {
       const deltaX = this.deltaX - event.deltaY;
       this.deltaX = deltaX < 0 ? deltaX : 0;
-
     }
   }
 
@@ -83,7 +81,6 @@ export class GraphCanvasExampleComponent implements OnInit {
     }
   }
 
-
   @HostListener('mouseup')
   private onMouseOn() {
     this.showData = true;
@@ -94,8 +91,7 @@ export class GraphCanvasExampleComponent implements OnInit {
     this.showData = false;
   }
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     setInterval(() => {
@@ -105,5 +101,4 @@ export class GraphCanvasExampleComponent implements OnInit {
       this.rectY = Math.random() * 100;
     }, 1000);
   }
-
 }

@@ -16,13 +16,9 @@
       "dom"
     ],
     "paths": {
-      "lib": [
-        "dist/lib/lib",
-        "dist/lib"
-      ],
-      "canvas-dom-renderer": [
-        "dist/canvas-dom-renderer/canvas-dom-renderer",
-        "dist/canvas-dom-renderer"
+      "angular-canvas-lib": [
+        "dist/angular-canvas-lib/angular-canvas-lib",
+        "dist/angular-canvas-lib"
       ]
     }
   }

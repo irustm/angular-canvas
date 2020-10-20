@@ -20,10 +20,10 @@
       "path": "./projects/lib/tsconfig.spec.json"
     },
     {
-      "path": "./projects/canvas-dom-renderer/tsconfig.lib.json"
+      "path": "./projects/angular-canvas-lib/tsconfig.lib.json"
     },
     {
-      "path": "./projects/canvas-dom-renderer/tsconfig.spec.json"
+      "path": "./projects/angular-canvas-lib/tsconfig.spec.json"
     }
 ]
 }

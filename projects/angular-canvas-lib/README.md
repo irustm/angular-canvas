@@ -17,12 +17,7 @@ export class GraphLineElement implements NgCanvasElement {
 ```
 
 Register this element in module
-
 ```ts
-import { CanvasDomModule } from 'angular-canvas';
-
-...
-
 imports: [
     CanvasDomModule.forRoot(
     [

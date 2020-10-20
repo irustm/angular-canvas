@@ -1,5 +1,5 @@
 {
-  "name": "canvas-dom-renderer",
+  "name": "angular-canvas",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^10.0.14",

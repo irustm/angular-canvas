@@ -124,38 +124,38 @@
         }
       }
     },
-    "lib": {
+    "angular-canvas-lib": {
       "projectType": "library",
-      "root": "projects/lib",
-      "sourceRoot": "projects/lib/src",
+      "root": "projects/angular-canvas-lib",
+      "sourceRoot": "projects/angular-canvas-lib/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/lib/tsconfig.lib.json",
-            "project": "projects/lib/ng-package.json"
+            "tsConfig": "projects/angular-canvas-lib/tsconfig.lib.json",
+            "project": "projects/angular-canvas-lib/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/lib/tsconfig.lib.prod.json"
+              "tsConfig": "projects/angular-canvas-lib/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/lib/src/test.ts",
-            "tsConfig": "projects/lib/tsconfig.spec.json",
-            "karmaConfig": "projects/lib/karma.conf.js"
+            "main": "projects/angular-canvas-lib/src/test.ts",
+            "tsConfig": "projects/angular-canvas-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-canvas-lib/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/lib/tsconfig.lib.json",
-              "projects/lib/tsconfig.spec.json"
+              "projects/angular-canvas-lib/tsconfig.lib.json",
+              "projects/angular-canvas-lib/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -163,46 +163,7 @@
           }
         }
       }
-    },
-    "canvas-dom-renderer": {
-      "projectType": "library",
-      "root": "projects/canvas-dom-renderer",
-      "sourceRoot": "projects/canvas-dom-renderer/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/canvas-dom-renderer/tsconfig.lib.json",
-            "project": "projects/canvas-dom-renderer/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/canvas-dom-renderer/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/canvas-dom-renderer/src/test.ts",
-            "tsConfig": "projects/canvas-dom-renderer/tsconfig.spec.json",
-            "karmaConfig": "projects/canvas-dom-renderer/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/canvas-dom-renderer/tsconfig.lib.json",
-              "projects/canvas-dom-renderer/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    }},
+    }
+  },
   "defaultProject": "angular-canvas"
 }

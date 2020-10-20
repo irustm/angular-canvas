@@ -1,4 +1,4 @@
-import {NgCanvasElement} from '../../../../projects/canvas-dom-renderer/src/lib/components/ng-canvas-element';
+import {NgCanvasElement} from '../../../../projects/angular-canvas-lib/src/lib/components/ng-canvas-element';
 import {RendererStyleFlags2} from '@angular/core';
 import {NgCanvas, CanvasElement} from 'angular-canvas';
 

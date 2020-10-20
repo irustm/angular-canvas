@@ -1,6 +1,7 @@
-import {NgCanvas, NgCanvasElement, CanvasElement} from 'angular-canvas';
+import { NgCanvas, NgCanvasElement, CanvasElement } from 'angular-canvas';
 
-const CAT_SPRITES = [`
+const CAT_SPRITES = [
+  `
 000000bb000b00
 000000bgbbbg00
 00b00bbbbbbb0b
@@ -39,7 +40,7 @@ b00000bbybbyb0
 000bb0000bb000
 0000b00000b000
 `,
-    `
+  `
 000000bb000b00
 000000bgbbbg00
 00000bbbbbbb0b
@@ -51,13 +52,16 @@ bb000bbbbbbb0b
 000bbbbwbbbw00
 000bb0000bb000
 000b00000b0000
-`
+`,
 ];
 
 const SIZE = 6;
 
 function getMatrix(arr) {
-  return arr.split(/\n/).filter(Boolean).map(s => s.split(''));
+  return arr
+    .split(/\n/)
+    .filter(Boolean)
+    .map((s) => s.split(''));
 }
 const CAT_SPRITE_MATRIX = CAT_SPRITES.map(getMatrix);
 
@@ -69,13 +73,15 @@ const COLOR_MAP = new Map([
   ['g', '#4c4c4c'],
 ]);
 
-function getColor(s: string){
-  if (COLOR_MAP.has(s)) { return COLOR_MAP.get(s); }
+function getColor(s: string) {
+  if (COLOR_MAP.has(s)) {
+    return COLOR_MAP.get(s);
+  }
   return 'transparent';
 }
 
 @CanvasElement({
-  selector: 'cat'
+  selector: 'cat',
 })
 export class NgCat implements NgCanvasElement {
   public parent: NgCanvas;
@@ -91,20 +97,19 @@ export class NgCat implements NgCanvasElement {
   public downPressed = false;
 
   setNgProperty(name: string, value: any): void {
-      this[name] = value;
-      this.parent.drawAll();
+    this[name] = value;
+    this.parent.drawAll();
   }
 
   draw(context: CanvasRenderingContext2D, time: number): void {
     let dx = 0;
 
-    if (this.rightPressed && this.parent.element.width > this.x + (SIZE * 14)) {
+    if (this.rightPressed && this.parent.element.width > this.x + SIZE * 14) {
       dx = this.downPressed ? 1 : 2;
     }
     if (this.leftPressed && 0 < this.x) {
       dx = this.downPressed ? -1 : -2;
     }
-
 
     this.x += dx;
     let y = this.y;
@@ -121,17 +126,16 @@ export class NgCat implements NgCanvasElement {
       matrixLength += 2;
     }
 
-
     for (let ci = 0; ci < matrixLength; ci++) {
       let rows = matrix[ci];
       if (this.revert) {
-          rows = rows.slice().reverse();
+        rows = rows.slice().reverse();
       }
 
       for (let cy = 0; cy < rows.length; cy++) {
-          context.fillStyle = getColor(rows[cy]);
-          context.fillRect(this.x + cy * SIZE, y + ci * SIZE, SIZE, SIZE);
-        }
+        context.fillStyle = getColor(rows[cy]);
+        context.fillRect(this.x + cy * SIZE, y + ci * SIZE, SIZE, SIZE);
+      }
     }
     this.needDraw = this.rightPressed || this.leftPressed;
   }

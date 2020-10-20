@@ -3,13 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { DomTestComponent } from './dom-test/dom-test/dom-test.component';
-import {RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DomTestComponent
-  ],
+  declarations: [AppComponent, DomTestComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
@@ -19,16 +16,19 @@ import {RouterModule} from '@angular/router';
       },
       {
         path: 'graph',
-        loadChildren: () => import('./graph-example-module/graph-example.module').then(m => m.GraphExampleModule)
+        loadChildren: () =>
+          import('./graph-example-module/graph-example.module').then(
+            (m) => m.GraphExampleModule
+          ),
       },
       {
         path: 'game',
-        loadChildren: () => import('./game/game.module').then(m => m.GameModule)
-      }
-
-    ])
+        loadChildren: () =>
+          import('./game/game.module').then((m) => m.GameModule),
+      },
+    ]),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

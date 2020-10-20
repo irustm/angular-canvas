@@ -1,5 +1,5 @@
-import {NgCanvas} from './ng-canvas';
-import {RendererStyleFlags2} from '@angular/core';
+import { NgCanvas } from './ng-canvas';
+import { RendererStyleFlags2 } from '@angular/core';
 
 export interface NgCanvasElement {
   needDraw?: boolean;
@@ -35,6 +35,6 @@ export interface NgAttributeCanvasElement {
   removeAttribute(name: string, namespace?: string | null): void;
 }
 
-export interface NgPropertyCanvasElement{
+export interface NgPropertyCanvasElement {
   setNgProperty(name: string, value: any): void;
 }

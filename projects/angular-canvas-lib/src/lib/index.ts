@@ -1,7 +1,4 @@
-/*
- * Public API Surface of angular-canvas
- */
-
+export * from './canvas-dom.module';
 export * from '../lib/decorators/canvas-component';
 export * from '../lib/decorators/canvas-element';
 export * from '../lib/canvas-dom-renderer';

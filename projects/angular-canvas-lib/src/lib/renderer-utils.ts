@@ -1,4 +1,3 @@
-
 export const NAMESPACE_URIS: { [ns: string]: string } = {
   svg: 'http://www.w3.org/2000/svg',
   xhtml: 'http://www.w3.org/1999/xhtml',
@@ -8,7 +7,6 @@ export const NAMESPACE_URIS: { [ns: string]: string } = {
 };
 
 const COMPONENT_REGEX = /%COMP%/g;
-
 
 export const COMPONENT_VARIABLE = '%COMP%';
 export const HOST_ATTR = `_nghost-${COMPONENT_VARIABLE}`;
@@ -23,7 +21,10 @@ export function shimHostAttribute(componentShortId: string): string {
 }
 
 export function flattenStyles(
-  compId: string, styles: Array<any | any[]>, target: string[]): string[] {
+  compId: string,
+  styles: Array<any | any[]>,
+  target: string[]
+): string[] {
   // tslint:disable-next-line:prefer-for-of
   for (let i = 0; i < styles.length; i++) {
     let style = styles[i];

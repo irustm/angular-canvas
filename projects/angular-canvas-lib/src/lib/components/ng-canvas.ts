@@ -1,8 +1,12 @@
-import {NgCanvasElement} from './ng-canvas-element';
-import {RendererStyleFlags2} from '@angular/core';
+import { NgCanvasElement } from './ng-canvas-element';
+import { RendererStyleFlags2 } from '@angular/core';
 
-function getArrayDrawingComponents(set: Set<NgCanvasElement>): NgCanvasElement[] {
-  return Array.from(set.values()).filter((c: NgCanvasElement) => c && !!c.draw) as NgCanvasElement[];
+function getArrayDrawingComponents(
+  set: Set<NgCanvasElement>
+): NgCanvasElement[] {
+  return Array.from(set.values()).filter(
+    (c: NgCanvasElement) => c && !!c.draw
+  ) as NgCanvasElement[];
 }
 
 export class NgCanvas implements NgCanvasElement {
@@ -40,7 +44,7 @@ export class NgCanvas implements NgCanvasElement {
     this.element.style.position = 'absolute';
     this.context = this.element.getContext('2d');
 
-    window.requestAnimationFrame(time => this.draw(time));
+    window.requestAnimationFrame((time) => this.draw(time));
   }
 
   addClass(name): void {
@@ -62,30 +66,24 @@ export class NgCanvas implements NgCanvasElement {
     this.componentsDrawings = getArrayDrawingComponents(this.componentSet);
   }
 
-  removeAttribute(name: string, namespace?: string | null): void {
-  }
+  removeAttribute(name: string, namespace?: string | null): void {}
 
-  removeClass(name: string): void {
-  }
+  removeClass(name: string): void {}
 
-  removeStyle(style: string, flags?: RendererStyleFlags2): void {
-  }
+  removeStyle(style: string, flags?: RendererStyleFlags2): void {}
 
   setNgAttribute(name: string, value: string, namespace?: string | null): void {
     this.element.setAttribute(name, value);
   }
 
-  setNgProperty(name: string, value: any): void {
-  }
+  setNgProperty(name: string, value: any): void {}
 
-  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {
-  }
+  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {}
 
-  setValue(value: any): void {
-  }
+  setValue(value: any): void {}
 
   drawAll(): void {
-    window.requestAnimationFrame(time => this.draw(time));
+    window.requestAnimationFrame((time) => this.draw(time));
   }
 
   // @ts-ignore
@@ -103,7 +101,7 @@ export class NgCanvas implements NgCanvasElement {
 
     if (needDraw) {
       // tslint:disable-next-line:no-shadowed-variable
-      window.requestAnimationFrame(time => this.draw(time));
+      window.requestAnimationFrame((time) => this.draw(time));
     }
   }
 }

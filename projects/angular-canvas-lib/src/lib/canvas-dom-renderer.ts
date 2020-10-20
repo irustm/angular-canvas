@@ -1,11 +1,26 @@
-import {Injectable, Renderer2, RendererFactory2, RendererStyleFlags2, RendererType2, ViewEncapsulation} from '@angular/core';
-import {NgCanvasElement} from './components/ng-canvas-element';
-import {NgCanvas} from './components/ng-canvas';
-import {EventManager} from '@angular/platform-browser';
-import {ɵDomSharedStylesHost as DomSharedStylesHost} from '@angular/platform-browser';
-import {DefaultDomRenderer2, EmulatedEncapsulationDomRenderer2, ShadowDomRenderer} from './default-dom-renderer';
-import {flattenStyles, shimContentAttribute, shimHostAttribute} from './renderer-utils';
-import {getMetadataArgsStorage} from './metadata/metadata-storage';
+import {
+  Injectable,
+  Renderer2,
+  RendererFactory2,
+  RendererStyleFlags2,
+  RendererType2,
+  ViewEncapsulation,
+} from '@angular/core';
+import { NgCanvasElement } from './components/ng-canvas-element';
+import { NgCanvas } from './components/ng-canvas';
+import { EventManager } from '@angular/platform-browser';
+import { ɵDomSharedStylesHost as DomSharedStylesHost } from '@angular/platform-browser';
+import {
+  DefaultDomRenderer2,
+  EmulatedEncapsulationDomRenderer2,
+  ShadowDomRenderer,
+} from './default-dom-renderer';
+import {
+  flattenStyles,
+  shimContentAttribute,
+  shimHostAttribute,
+} from './renderer-utils';
+import { getMetadataArgsStorage } from './metadata/metadata-storage';
 
 @Injectable()
 export class CanvasDomRendererFactory implements RendererFactory2 {
@@ -20,8 +35,7 @@ export class CanvasDomRendererFactory implements RendererFactory2 {
     this.defaultRenderer = new DefaultDomRenderer2(eventManager);
   }
 
-  end() {
-  }
+  end() {}
 
   createRenderer(element: any, type: RendererType2 | null): Renderer2 {
     if (!element || !type) {
@@ -33,7 +47,12 @@ export class CanvasDomRendererFactory implements RendererFactory2 {
       let renderer = this.rendererByCompId.get(type.id);
 
       if (!renderer) {
-        renderer = new CanvasRenderer(this.eventManager, this.sharedStylesHost, type, this.appId);
+        renderer = new CanvasRenderer(
+          this.eventManager,
+          this.sharedStylesHost,
+          type,
+          this.appId
+        );
         this.rendererByCompId.set(type.id, renderer);
       }
       (renderer as CanvasRenderer).applyToHost(element);
@@ -45,7 +64,11 @@ export class CanvasDomRendererFactory implements RendererFactory2 {
         let renderer = this.rendererByCompId.get(type.id);
         if (!renderer) {
           renderer = new EmulatedEncapsulationDomRenderer2(
-            this.eventManager, this.sharedStylesHost, type, this.appId);
+            this.eventManager,
+            this.sharedStylesHost,
+            type,
+            this.appId
+          );
           this.rendererByCompId.set(type.id, renderer);
         }
         (renderer as EmulatedEncapsulationDomRenderer2).applyToHost(element);
@@ -53,7 +76,12 @@ export class CanvasDomRendererFactory implements RendererFactory2 {
       }
       case ViewEncapsulation.Native:
       case ViewEncapsulation.ShadowDom:
-        return new ShadowDomRenderer(this.eventManager, this.sharedStylesHost, element, type);
+        return new ShadowDomRenderer(
+          this.eventManager,
+          this.sharedStylesHost,
+          element,
+          type
+        );
 
       default: {
         if (!this.rendererByCompId.has(type.id)) {
@@ -76,10 +104,16 @@ export class CanvasRenderer implements Renderer2 {
   destroyNode: ((node: any) => void) | null;
 
   constructor(
-    eventManager: EventManager, sharedStylesHost: DomSharedStylesHost,
-    private component: RendererType2, appId: string
+    eventManager: EventManager,
+    sharedStylesHost: DomSharedStylesHost,
+    private component: RendererType2,
+    appId: string
   ) {
-    const styles = flattenStyles(appId + '-' + component.id, component.styles, []);
+    const styles = flattenStyles(
+      appId + '-' + component.id,
+      component.styles,
+      []
+    );
     sharedStylesHost.addStyles(styles);
 
     this.contentAttr = shimContentAttribute(appId + '-' + component.id);
@@ -112,10 +146,14 @@ export class CanvasRenderer implements Renderer2 {
   }
 
   selectRootElement(selectorOrNode: any, preserveContent?: boolean): any {
-    const el: any = typeof selectorOrNode === 'string' ? document.querySelector(selectorOrNode) :
-      selectorOrNode;
+    const el: any =
+      typeof selectorOrNode === 'string'
+        ? document.querySelector(selectorOrNode)
+        : selectorOrNode;
     if (!el) {
-      throw new Error(`The selector "${selectorOrNode}" did not match any elements`);
+      throw new Error(
+        `The selector "${selectorOrNode}" did not match any elements`
+      );
     }
     if (!preserveContent) {
       el.textContent = '';
@@ -157,15 +195,9 @@ export class CanvasRenderer implements Renderer2 {
     return document.createComment(value);
   }
 
-  destroy(): void {
-  }
+  destroy(): void {}
 
-  insertBefore(
-    parent: NgCanvasElement,
-    newChild: any,
-    refChild: any
-  ): void {
-
+  insertBefore(parent: NgCanvasElement, newChild: any, refChild: any): void {
     if (parent && parent.insertBefore) {
       newChild.parent = parent;
       parent.insertBefore(newChild, refChild);
@@ -189,7 +221,7 @@ export class CanvasRenderer implements Renderer2 {
     console.log('nextSibling', node);
     return {
       previous: node,
-      next: node.nextSibling
+      next: node.nextSibling,
     };
   }
 
@@ -241,5 +273,3 @@ export class CanvasRenderer implements Renderer2 {
     node.setValue && node.setValue(value);
   }
 }
-
-

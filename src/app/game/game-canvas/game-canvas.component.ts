@@ -1,5 +1,5 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild, ViewChildren} from '@angular/core';
-import {CanvasComponent} from '../../../../projects/canvas-dom-renderer/src/lib/decorators/canvas-component';
+import {CanvasComponent} from '../../../../projects/angular-canvas-lib/src/lib/decorators/canvas-component';
 import {interval, Subscription} from 'rxjs';
 import {NgCat} from '../elements';
 

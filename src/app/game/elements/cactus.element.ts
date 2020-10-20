@@ -1,4 +1,4 @@
-import {NgCanvas, NgCanvasElement, CanvasElement} from 'angular-canvas';
+import { NgCanvas, NgCanvasElement, CanvasElement } from 'angular-canvas';
 
 const SIZE = 6;
 const CAT_HEIGHT = 10;
@@ -29,7 +29,10 @@ w0wwwwwccccccccwwww0ww
 `;
 
 function getMatrix(arr) {
-  return arr.split(/\n/).filter(Boolean).map(s => s.split(''));
+  return arr
+    .split(/\n/)
+    .filter(Boolean)
+    .map((s) => s.split(''));
 }
 const CACTUS_MATRIX = getMatrix(CACTUS);
 
@@ -40,14 +43,15 @@ const COLOR_MAP = new Map([
   ['w', '#d1784b'],
 ]);
 
-function getColor(s: string){
-  if (COLOR_MAP.has(s)) { return COLOR_MAP.get(s); }
+function getColor(s: string) {
+  if (COLOR_MAP.has(s)) {
+    return COLOR_MAP.get(s);
+  }
   return 'transparent';
 }
 
-
 @CanvasElement({
-  selector: 'cactus'
+  selector: 'cactus',
 })
 export class NgCactus implements NgCanvasElement {
   public parent: NgCanvas;
@@ -65,7 +69,7 @@ export class NgCactus implements NgCanvasElement {
 
   draw(context: CanvasRenderingContext2D, time: number): void {
     this.height = this.parent.element.height - 100;
-    const y =  Math.floor(this.height / 1.5);
+    const y = Math.floor(this.height / 1.5);
     const x = 200;
 
     const matrixLength = CACTUS_MATRIX.length;

@@ -23,12 +23,18 @@ export class NgBackground implements NgCanvasElement {
     this.width = this.parent.element.width;
     this.height = this.parent.element.height;
 
-    context.fillStyle = '#4288c3';
+    context.fillStyle = '#80b4cc';
     context.fillRect(0, 0, this.width, this.height / 1.5);
+    context.fillStyle = '#60b4cc';
+    context.fillRect(0, 100, this.width, 150);
+    context.fillStyle = '#40b4cc';
+    context.fillRect(0, 150, this.width, 50);
+    context.fillStyle = '#87cad9';
+    context.fillRect(0, 250, this.width, 50);
     context.fillStyle = '#FFF';
 
     context.beginPath();
-    context.arc(150, 150, 70, 0, 2 * Math.PI, false);
+    context.arc(Math.ceil(this.height / 5), Math.ceil(this.height / 6), Math.ceil(this.height / 15), 0, 2 * Math.PI, false);
     context.fill();
 
     // context.fillStyle = '#FFF';
