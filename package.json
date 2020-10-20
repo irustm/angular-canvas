@@ -1,10 +1,10 @@
 {
   "name": "angular-canvas",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Angular canvas renderer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/irustm/ng-app-counter.git"
+    "url": "https://github.com/irustm/angular-canvas.git"
   },
   "keywords": [
     "angular",

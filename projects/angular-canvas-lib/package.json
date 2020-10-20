@@ -1,6 +1,22 @@
 {
   "name": "angular-canvas",
   "version": "0.0.1",
+  "description": "Angular canvas renderer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/irustm/angular-canvas.git"
+  },
+  "keywords": [
+    "angular",
+    "canvas",
+    "renderer"
+  ],
+  "author": "irustm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/irustm/angular-canvas/issues"
+  },
+  "homepage": "https://github.com/irustm/angular-canvas#readme",
   "peerDependencies": {
     "@angular/common": "^10.0.14",
     "@angular/core": "^10.0.14"
