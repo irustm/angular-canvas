@@ -9,7 +9,7 @@ function getArrayDrawingComponents(
   ) as NgCanvasElement[];
 }
 
-export class NgCanvas implements NgCanvasElement {
+export class NgCanvas {
   public static nodeName = 'canvas';
   public readonly context: CanvasRenderingContext2D;
   public readonly element: HTMLCanvasElement;
@@ -19,7 +19,7 @@ export class NgCanvas implements NgCanvasElement {
     this.resizeObserver = new ResizeObserver(([entry]) => {
       this.element.width = entry.contentRect.width;
       this.element.height = entry.contentRect.height;
-      this.drawAll();
+      this.drawAll(false);
     });
 
     this.resizeObserver.observe(element);
@@ -82,14 +82,16 @@ export class NgCanvas implements NgCanvasElement {
 
   setValue(value: any): void {}
 
-  drawAll(): void {
-    window.requestAnimationFrame((time) => this.draw(time));
+  drawAll(clear?: boolean): void {
+    window.requestAnimationFrame((time) => this.draw(time, clear));
   }
 
   // @ts-ignore
-  draw(time: number): void {
+  draw(time: number, clear: boolean = true): void {
     const context = this.context;
-    context.clearRect(0, 0, this.element.width, this.element.height);
+    if (clear) {
+      context.clearRect(0, 0, this.element.width, this.element.height);
+    }
 
     let needDraw = false;
 

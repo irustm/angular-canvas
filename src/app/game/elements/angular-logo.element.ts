@@ -1,4 +1,5 @@
 import { NgCanvas, NgCanvasElement, CanvasElement } from 'angular-canvas';
+import { getMatrix, renderMatrix } from './utils';
 
 const SIZE = 3;
 
@@ -25,12 +26,6 @@ rrrrrwwrrddwwddrrr
 0000000rrrr
 `;
 
-function getMatrix(arr) {
-  return arr
-    .split(/\n/)
-    .filter(Boolean)
-    .map((s) => s.split(''));
-}
 const LOGO_MATRIX = getMatrix(LOGO);
 
 const COLOR_MAP = new Map([
@@ -39,13 +34,6 @@ const COLOR_MAP = new Map([
   ['d', '#ca413a'],
   ['w', '#ffffff'],
 ]);
-
-function getColor(s: string) {
-  if (COLOR_MAP.has(s)) {
-    return COLOR_MAP.get(s);
-  }
-  return 'transparent';
-}
 
 @CanvasElement({
   selector: 'angular-logo',
@@ -65,19 +53,9 @@ export class NgLogo implements NgCanvasElement {
   }
 
   draw(context: CanvasRenderingContext2D, time: number): void {
-    this.height = this.parent.element.height - 100;
-    const y = 50; //Math.floor(this.height / 1.5);
+    const y = 50;
     const x = 50;
 
-    const matrixLength = LOGO_MATRIX.length;
-
-    for (let ci = 0; ci < matrixLength; ci++) {
-      const rows = LOGO_MATRIX[ci];
-
-      for (let cy = 0; cy < rows.length; cy++) {
-        context.fillStyle = getColor(rows[cy]);
-        context.fillRect(x + cy * SIZE, y + ci * SIZE, SIZE, SIZE);
-      }
-    }
+    renderMatrix(context, LOGO_MATRIX, COLOR_MAP, SIZE, x, y);
   }
 }

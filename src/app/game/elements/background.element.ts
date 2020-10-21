@@ -1,8 +1,5 @@
 import { NgCanvas, NgCanvasElement, CanvasElement } from 'angular-canvas';
 
-const CAT_SIZE = 6;
-const CAT_HEIGHT = 11;
-
 @CanvasElement({
   selector: 'background',
 })
