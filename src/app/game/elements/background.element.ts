@@ -1,10 +1,10 @@
-import {NgCanvas, NgCanvasElement, CanvasElement} from 'angular-canvas';
+import { NgCanvas, NgCanvasElement, CanvasElement } from 'angular-canvas';
 
 const CAT_SIZE = 6;
 const CAT_HEIGHT = 11;
 
 @CanvasElement({
-  selector: 'background'
+  selector: 'background',
 })
 export class NgBackground implements NgCanvasElement {
   public parent: NgCanvas;
@@ -23,27 +23,32 @@ export class NgBackground implements NgCanvasElement {
     this.width = this.parent.element.width;
     this.height = this.parent.element.height;
 
-    context.fillStyle = '#80b4cc';
+    context.fillStyle = '#abddff';
     context.fillRect(0, 0, this.width, this.height / 1.5);
-    context.fillStyle = '#60b4cc';
-    context.fillRect(0, 100, this.width, 150);
-    context.fillStyle = '#40b4cc';
-    context.fillRect(0, 150, this.width, 50);
-    context.fillStyle = '#87cad9';
-    context.fillRect(0, 250, this.width, 50);
-    context.fillStyle = '#FFF';
+
+    context.fillStyle = '#a1ebfe';
+    context.fillRect(0, 0, this.width, this.height / 1.8);
+
+    context.fillStyle = '#adf8ff';
+    context.fillRect(0, 0, this.width, this.height / 2.2);
+
+    context.fillStyle = '#b3fcfe';
+    context.fillRect(0, 0, this.width, this.height / 2.6);
+
+    context.fillStyle = '#d0fef9';
+    context.fillRect(0, 0, this.width, this.height / 3);
+
+    context.fillStyle = '#ffffff';
 
     context.beginPath();
-    context.arc(Math.ceil(this.height / 5), Math.ceil(this.height / 6), Math.ceil(this.height / 15), 0, 2 * Math.PI, false);
+    context.arc(
+      Math.ceil(this.height / 5),
+      Math.ceil(this.height / 6),
+      Math.ceil(this.height / 15),
+      0,
+      2 * Math.PI,
+      false
+    );
     context.fill();
-
-    // context.fillStyle = '#FFF';
-    // context.beginPath();
-    // context.arc(150, 150, 150, 0, 2 * Math.PI, false);
-    // context.arc(250, 250, 150, 0, 2 * Math.PI, false);
-    // context.arc(150, 350, 150, 0, 2 * Math.PI, false);
-    // context.arc(450, 550, 150, 0, 2 * Math.PI, false);
-    // context.arc(150, 550, 150, 0, 2 * Math.PI, false);
-    // context.fill();
   }
 }
