@@ -1,4 +1,5 @@
 import { NgCanvas, NgCanvasElement, CanvasElement } from 'angular-canvas';
+import { getColor, getMatrix } from './utils';
 
 const CAT_SPRITES = [
   `
@@ -57,12 +58,6 @@ bb000bbbbbbb0b
 
 const SIZE = 6;
 
-function getMatrix(arr) {
-  return arr
-    .split(/\n/)
-    .filter(Boolean)
-    .map((s) => s.split(''));
-}
 const CAT_SPRITE_MATRIX = CAT_SPRITES.map(getMatrix);
 
 const COLOR_MAP = new Map([
@@ -72,13 +67,6 @@ const COLOR_MAP = new Map([
   ['y', '#ffd800'],
   ['g', '#4c4c4c'],
 ]);
-
-function getColor(s: string) {
-  if (COLOR_MAP.has(s)) {
-    return COLOR_MAP.get(s);
-  }
-  return 'transparent';
-}
 
 @CanvasElement({
   selector: 'cat',
@@ -96,6 +84,14 @@ export class NgCat implements NgCanvasElement {
   public leftPressed = false;
   public downPressed = false;
 
+  private callbackFunc;
+
+  addEventListener(eventName: string, callbackFunc) {
+    this.callbackFunc = callbackFunc;
+  }
+
+  removeEventListener(eventName: string, callbackFunc) {}
+
   setNgProperty(name: string, value: any): void {
     this[name] = value;
     this.parent.drawAll();
@@ -105,14 +101,18 @@ export class NgCat implements NgCanvasElement {
     let dx = 0;
 
     if (this.rightPressed && this.parent.element.width > this.x + SIZE * 14) {
-      dx = this.downPressed ? 1 : 2;
+      dx = this.downPressed ? 1 : 4;
     }
     if (this.leftPressed && 0 < this.x) {
-      dx = this.downPressed ? -1 : -2;
+      dx = this.downPressed ? -1 : -4;
     }
 
     this.x += dx;
     let y = this.y;
+
+    if (this.callbackFunc) {
+      this.callbackFunc(this.x);
+    }
 
     const matrix = CAT_SPRITE_MATRIX[this.spriteIndex];
     let matrixLength = matrix.length;
@@ -133,7 +133,7 @@ export class NgCat implements NgCanvasElement {
       }
 
       for (let cy = 0; cy < rows.length; cy++) {
-        context.fillStyle = getColor(rows[cy]);
+        context.fillStyle = getColor(COLOR_MAP, rows[cy]);
         context.fillRect(this.x + cy * SIZE, y + ci * SIZE, SIZE, SIZE);
       }
     }

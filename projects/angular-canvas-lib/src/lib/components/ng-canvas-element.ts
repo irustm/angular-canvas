@@ -14,6 +14,8 @@ export interface NgCanvasElement {
 
   setNgAttribute?(name: string, value: string, namespace?: string | null): void;
 
+  setAttribute?(name: string, value: string, namespace?: string | null): void;
+
   setNgProperty?(name: string, value: any): void;
 
   setStyle?(style: string, value: any, flags?: RendererStyleFlags2): void;

@@ -14,6 +14,8 @@ export class NgCanvas {
   public readonly context: CanvasRenderingContext2D;
   public readonly element: HTMLCanvasElement;
 
+  private requestId: number;
+
   public set parent(element) {
     // @ts-ignore
     this.resizeObserver = new ResizeObserver(([entry]) => {
@@ -83,7 +85,10 @@ export class NgCanvas {
   setValue(value: any): void {}
 
   drawAll(clear?: boolean): void {
-    window.requestAnimationFrame((time) => this.draw(time, clear));
+    this.requestId && window.cancelAnimationFrame(this.requestId);
+    this.requestId = window.requestAnimationFrame((time) =>
+      this.draw(time, clear)
+    );
   }
 
   // @ts-ignore
@@ -95,15 +100,14 @@ export class NgCanvas {
 
     let needDraw = false;
 
-    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.componentsDrawings.length; i++) {
       this.componentsDrawings[i].draw(context, time);
       needDraw = needDraw || this.componentsDrawings[i].needDraw;
     }
 
     if (needDraw) {
-      // tslint:disable-next-line:no-shadowed-variable
-      window.requestAnimationFrame((time) => this.draw(time));
+      this.requestId && window.cancelAnimationFrame(this.requestId);
+      this.requestId = window.requestAnimationFrame((time) => this.draw(time));
     }
   }
 }

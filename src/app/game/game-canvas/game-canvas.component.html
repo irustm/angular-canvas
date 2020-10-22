@@ -4,17 +4,26 @@
 </canvas>
 
 <canvas>
-  <angular-logo></angular-logo>
+  <cat
+    #cat
+    [x]="startUnitX"
+    [y]="startUnitY"
+    [spriteIndex]="catSpriteIndex"
+    (x)="updateUnitX($event)"
+    [revert]="revert"
+    [rightPressed]="rightPressed"
+    [leftPressed]="leftPressed"
+    [downPressed]="downPressed"
+  ></cat>
 </canvas>
 
 <canvas>
-  <cat #cat
-       [x]="unitX"
-       [y]="unitY"
-       [spriteIndex]="catSpriteIndex"
-       [revert]="revert"
-       [rightPressed]="rightPressed"
-       [leftPressed]="leftPressed"
-       [downPressed]="downPressed"
-  ></cat>
+  <angular-logo
+    [x]="250"
+    [step]="4"
+    [attr.unitX]="unitX"
+    [attr.unitY]="startUnitY"
+    (failed)="failed()"
+    (success)="success()"
+  ></angular-logo>
 </canvas>

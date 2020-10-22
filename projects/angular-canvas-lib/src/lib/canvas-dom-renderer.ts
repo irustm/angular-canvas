@@ -251,8 +251,7 @@ export class CanvasRenderer implements Renderer2 {
     value: string,
     namespace?: string | null
   ): void {
-    // tslint:disable-next-line:no-unused-expression
-    el.setNgAttribute && el.setNgAttribute(name, value, namespace);
+    el.setAttribute(name, value, namespace);
   }
 
   setProperty(el: NgCanvasElement, name: string, value: any): void {

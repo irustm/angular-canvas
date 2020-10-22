@@ -2,6 +2,7 @@ import { NgCanvas, NgCanvasElement, CanvasElement } from 'angular-canvas';
 import { getMatrix, renderMatrix } from './utils';
 
 const SIZE = 3;
+const CAT_SIZE = 7 * 6;
 
 const LOGO = `
 0000000rrrr
@@ -44,18 +45,57 @@ export class NgLogo implements NgCanvasElement {
 
   public x: number;
   public y: number;
+  public deltaY: number = 0;
+  public step: number = 1;
+  public unitX: number;
+  public unitY: number;
+
   public height: number;
   public width: number;
 
+  private callbackFunc: {
+    failed?: () => {};
+    success?: () => {};
+  } = {};
+
+  addEventListener(eventName: string, callbackFunc) {
+    this.callbackFunc[eventName] = callbackFunc;
+  }
+
+  removeEventListener(eventName: string, callbackFunc) {}
+
   setNgProperty(name: string, value: any): void {
     this[name] = value;
-    this.parent.drawAll();
+
+    if (this.x && this.step && this.unitX) {
+      this.parent.drawAll();
+    }
+  }
+
+  setAttribute(name, value) {
+    this[name] = value;
   }
 
   draw(context: CanvasRenderingContext2D, time: number): void {
-    const y = 50;
-    const x = 50;
+    this.deltaY += this.step;
 
-    renderMatrix(context, LOGO_MATRIX, COLOR_MAP, SIZE, x, y);
+    renderMatrix(context, LOGO_MATRIX, COLOR_MAP, SIZE, this.x, this.deltaY);
+
+    this.needDraw = this.deltaY < this.parent.element.height;
+
+    if (!this.needDraw && this.callbackFunc.failed) {
+      this.deltaY = -200;
+      this.callbackFunc.failed();
+    } else if (this.callbackFunc.success) {
+      if (this.x - CAT_SIZE < this.unitX && this.unitX < this.x + CAT_SIZE) {
+        if (
+          this.deltaY - CAT_SIZE < this.unitY &&
+          this.unitY < this.deltaY + CAT_SIZE
+        ) {
+          this.deltaY = -200;
+          this.callbackFunc.success();
+        }
+      }
+    }
   }
 }
