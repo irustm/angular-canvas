@@ -1,6 +1,7 @@
 import {
   APP_ID,
   NgModule,
+  NgZone,
   NO_ERRORS_SCHEMA,
   RendererFactory2,
 } from '@angular/core';
@@ -18,7 +19,7 @@ import { NgComponentClass } from './metadata/metadata-storage';
     {
       provide: RendererFactory2,
       useClass: CanvasDomRendererFactory,
-      deps: [EventManager, DomSharedStylesHost, APP_ID],
+      deps: [EventManager, DomSharedStylesHost, APP_ID, NgZone],
     },
   ],
   schemas: [NO_ERRORS_SCHEMA],

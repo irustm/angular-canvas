@@ -1,5 +1,6 @@
 import {
   Injectable,
+  NgZone,
   Renderer2,
   RendererFactory2,
   RendererStyleFlags2,
@@ -30,7 +31,8 @@ export class CanvasDomRendererFactory implements RendererFactory2 {
   constructor(
     private readonly eventManager: EventManager,
     private readonly sharedStylesHost: DomSharedStylesHost,
-    private readonly appId: string
+    private readonly appId: string,
+    private readonly ngZone: NgZone
   ) {
     this.defaultRenderer = new DefaultDomRenderer2(eventManager);
   }
@@ -51,7 +53,8 @@ export class CanvasDomRendererFactory implements RendererFactory2 {
           this.eventManager,
           this.sharedStylesHost,
           type,
-          this.appId
+          this.appId,
+          this.ngZone
         );
         this.rendererByCompId.set(type.id, renderer);
       }
@@ -107,7 +110,8 @@ export class CanvasRenderer implements Renderer2 {
     eventManager: EventManager,
     sharedStylesHost: DomSharedStylesHost,
     private component: RendererType2,
-    appId: string
+    appId: string,
+    private ngZone: NgZone
   ) {
     const styles = flattenStyles(
       appId + '-' + component.id,
@@ -131,7 +135,7 @@ export class CanvasRenderer implements Renderer2 {
     if (Component) {
       return new Component();
     } else if (name === 'canvas') {
-      const canvas = new NgCanvas();
+      const canvas = new NgCanvas(this.ngZone);
       canvas.element.setAttribute(this.contentAttr, '');
       return canvas;
     } else {

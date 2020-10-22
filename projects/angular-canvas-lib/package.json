@@ -1,6 +1,6 @@
 {
   "name": "angular-canvas",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Angular canvas renderer",
   "repository": {
     "type": "git",

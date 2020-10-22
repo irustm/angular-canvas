@@ -1,5 +1,5 @@
 import { NgCanvasElement } from './ng-canvas-element';
-import { RendererStyleFlags2 } from '@angular/core';
+import { NgZone, RendererStyleFlags2 } from '@angular/core';
 
 function getArrayDrawingComponents(
   set: Set<NgCanvasElement>
@@ -41,12 +41,14 @@ export class NgCanvas {
   // @ts-ignore
   private resizeObserver: ResizeObserver;
 
-  constructor() {
+  constructor(private readonly ngZone: NgZone) {
     this.element = document.createElement('canvas');
     this.element.style.position = 'absolute';
     this.context = this.element.getContext('2d');
 
-    window.requestAnimationFrame((time) => this.draw(time));
+    this.ngZone.runOutsideAngular(() => {
+      window.requestAnimationFrame((time) => this.draw(time));
+    });
   }
 
   addClass(name): void {
@@ -85,10 +87,12 @@ export class NgCanvas {
   setValue(value: any): void {}
 
   drawAll(clear?: boolean): void {
-    this.requestId && window.cancelAnimationFrame(this.requestId);
-    this.requestId = window.requestAnimationFrame((time) =>
-      this.draw(time, clear)
-    );
+    this.ngZone.runOutsideAngular(() => {
+      this.requestId && window.cancelAnimationFrame(this.requestId);
+      this.requestId = window.requestAnimationFrame((time) =>
+        this.draw(time, clear)
+      );
+    });
   }
 
   // @ts-ignore
