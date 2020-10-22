@@ -2,6 +2,8 @@ import { NgCanvas } from './ng-canvas';
 import { RendererStyleFlags2 } from '@angular/core';
 
 export interface NgCanvasElement {
+  style?: CSSStyleDeclaration;
+  classList?: DOMTokenList;
   needDraw?: boolean;
   parent: NgCanvas;
   draw(context: CanvasRenderingContext2D, time?: number): void;
@@ -29,6 +31,10 @@ export interface NgCanvasElement {
   removeClass?(name: string): void;
 
   removeStyle?(style: string, flags?: RendererStyleFlags2): void;
+
+  setAttributeNS?(namespaceUri: string, name: string, value: string): void;
+
+  removeAttributeNS?(namespaceUri: string, name: string): void;
 }
 
 export interface NgAttributeCanvasElement {

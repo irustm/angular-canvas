@@ -18,6 +18,7 @@ import {
 } from './default-dom-renderer';
 import {
   flattenStyles,
+  NAMESPACE_URIS,
   shimContentAttribute,
   shimHostAttribute,
 } from './renderer-utils';
@@ -126,7 +127,7 @@ export class CanvasRenderer implements Renderer2 {
 
   // tslint:disable-next-line:typedef
   applyToHost(element: any) {
-    element.setAttribute(this.hostAttr, '');
+    this.setAttribute(element, this.hostAttr, '');
   }
 
   createElement(name: string, namespace?: string | null): any {
@@ -139,8 +140,19 @@ export class CanvasRenderer implements Renderer2 {
       canvas.element.setAttribute(this.contentAttr, '');
       return canvas;
     } else {
-      const element = document.createElement(name);
-      element.setAttribute(this.contentAttr, '');
+      let element;
+      if (namespace) {
+        // In cases where Ivy (not ViewEngine) is giving us the actual namespace, the look up by key
+        // will result in undefined, so we just return the namespace here.
+        element = document.createElementNS(
+          NAMESPACE_URIS[namespace] || namespace,
+          name
+        );
+      } else {
+        element = document.createElement(name);
+      }
+
+      this.setAttribute(element, this.contentAttr, '');
       return element;
     }
   }
@@ -166,11 +178,19 @@ export class CanvasRenderer implements Renderer2 {
   }
 
   addClass(el: NgCanvasElement, name: string): void {
-    el.addClass(name);
+    if (el.classList) {
+      el.classList.add(name);
+    } else {
+      el.addClass(name);
+    }
   }
 
   removeClass(el: NgCanvasElement, name: string): void {
-    el.removeClass(name);
+    if (el.classList) {
+      el.classList.add(name);
+    } else {
+      el.removeClass(name);
+    }
   }
 
   appendChild(parent: NgCanvasElement, newChild: NgCanvasElement): void {
@@ -222,7 +242,6 @@ export class CanvasRenderer implements Renderer2 {
 
   // tslint:disable-next-line:typedef
   nextSibling(node: any) {
-    console.log('nextSibling', node);
     return {
       previous: node,
       next: node.nextSibling,
@@ -238,7 +257,21 @@ export class CanvasRenderer implements Renderer2 {
     name: string,
     namespace?: string | null
   ): void {
-    el.removeAttribute(name, namespace);
+    if (namespace) {
+      // TODO(FW-811): Ivy may cause issues here because it's passing around
+      // full URIs for namespaces, therefore this lookup will fail.
+      const namespaceUri = NAMESPACE_URIS[namespace];
+      if (namespaceUri) {
+        el.removeAttributeNS(namespaceUri, name);
+      } else {
+        // TODO(FW-811): Since ivy is passing around full URIs for namespaces
+        // this could result in properties like `http://www.w3.org/2000/svg:cx="123"`,
+        // which is wrong.
+        el.removeAttribute(`${namespace}:${name}`);
+      }
+    } else {
+      el.removeAttribute(name);
+    }
   }
 
   removeStyle(
@@ -255,7 +288,19 @@ export class CanvasRenderer implements Renderer2 {
     value: string,
     namespace?: string | null
   ): void {
-    el.setAttribute(name, value, namespace);
+    if (namespace) {
+      name = namespace + ':' + name;
+      // TODO(FW-811): Ivy may cause issues here because it's passing around
+      // full URIs for namespaces, therefore this lookup will fail.
+      const namespaceUri = NAMESPACE_URIS[namespace];
+      if (namespaceUri) {
+        el.setAttributeNS(namespaceUri, name, value);
+      } else {
+        el.setAttribute(name, value);
+      }
+    } else {
+      el.setAttribute(name, value);
+    }
   }
 
   setProperty(el: NgCanvasElement, name: string, value: any): void {
@@ -268,11 +313,28 @@ export class CanvasRenderer implements Renderer2 {
     value: any,
     flags?: RendererStyleFlags2
   ): void {
-    el.setStyle(style, value, flags);
+    if (el.style) {
+      // tslint:disable-next-line:no-bitwise
+      if (flags & RendererStyleFlags2.DashCase) {
+        el.style.setProperty(
+          // tslint:disable-next-line:no-bitwise
+          style,
+          value,
+          !!(flags & RendererStyleFlags2.Important) ? 'important' : ''
+        );
+      } else {
+        el.style[style] = value;
+      }
+    } else {
+      el.setStyle(style, value, flags);
+    }
   }
 
-  setValue(node: NgCanvasElement, value: string): void {
-    // tslint:disable-next-line:no-unused-expression
-    node.setValue && node.setValue(value);
+  setValue(node: any, value: string): void {
+    if (node.setValue) {
+      node.setValue && node.setValue(value);
+    } else {
+      node.nodeValue = value;
+    }
   }
 }

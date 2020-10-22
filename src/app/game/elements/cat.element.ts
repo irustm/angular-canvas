@@ -83,6 +83,8 @@ export class NgCat implements NgCanvasElement {
   public rightPressed = false;
   public leftPressed = false;
   public downPressed = false;
+  public speed = 4;
+  public size = SIZE;
 
   private callbackFunc;
 
@@ -99,12 +101,13 @@ export class NgCat implements NgCanvasElement {
 
   draw(context: CanvasRenderingContext2D, time: number): void {
     let dx = 0;
+    const size = this.size;
 
     if (this.rightPressed && this.parent.element.width > this.x + SIZE * 14) {
-      dx = this.downPressed ? 1 : 4;
+      dx = this.downPressed ? 1 : this.speed;
     }
     if (this.leftPressed && 0 < this.x) {
-      dx = this.downPressed ? -1 : -4;
+      dx = this.downPressed ? -1 : -this.speed;
     }
 
     this.x += dx;
@@ -118,11 +121,11 @@ export class NgCat implements NgCanvasElement {
     let matrixLength = matrix.length;
 
     // Cat is seat
-    y += 2 * SIZE;
+    y += 2 * size;
     matrixLength -= 2;
 
     if (!this.downPressed && (this.rightPressed || this.leftPressed)) {
-      y -= 2 * SIZE;
+      y -= 2 * size;
       matrixLength += 2;
     }
 
@@ -134,7 +137,7 @@ export class NgCat implements NgCanvasElement {
 
       for (let cy = 0; cy < rows.length; cy++) {
         context.fillStyle = getColor(COLOR_MAP, rows[cy]);
-        context.fillRect(this.x + cy * SIZE, y + ci * SIZE, SIZE, SIZE);
+        context.fillRect(this.x + cy * size, y + ci * size, size, size);
       }
     }
     this.needDraw = this.rightPressed || this.leftPressed;

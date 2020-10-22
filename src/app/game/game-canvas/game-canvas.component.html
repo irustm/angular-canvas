@@ -8,12 +8,14 @@
     #cat
     [x]="startUnitX"
     [y]="startUnitY"
+    [speed]="unitSpeed"
+    [size]="unitSize"
     [spriteIndex]="catSpriteIndex"
-    (x)="updateUnitX($event)"
     [revert]="revert"
     [rightPressed]="rightPressed"
     [leftPressed]="leftPressed"
     [downPressed]="downPressed"
+    (x)="updateUnitX($event)"
   ></cat>
 </canvas>
 
@@ -27,3 +29,7 @@
     (success)="success()"
   ></angular-logo>
 </canvas>
+
+<div class="results">
+  Score: {{score}}
+</div>

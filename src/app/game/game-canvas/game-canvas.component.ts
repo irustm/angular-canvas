@@ -4,7 +4,6 @@ import {
   HostListener,
   OnInit,
   ViewChild,
-  ViewChildren,
 } from '@angular/core';
 import { CanvasComponent } from '../../../../projects/angular-canvas-lib/src/lib/decorators/canvas-component';
 import { interval, Subscription } from 'rxjs';
@@ -20,13 +19,15 @@ export class GameCanvasComponent implements OnInit {
   public startUnitY = 10;
   public startUnitX = 10;
   public unitX = 10;
+  public unitSize = 6;
+  public unitSpeed = 4;
   public catSpriteIndex = 0;
   public revert = false;
   public rightPressed = false;
   public leftPressed = false;
   public downPressed = false;
 
-  public bools = 0;
+  public score = 0;
 
   @ViewChild('cat') cat: ElementRef<NgCat>;
 
@@ -94,11 +95,11 @@ export class GameCanvasComponent implements OnInit {
   }
 
   failed() {
-    console.log('fail');
+    this.score = 0;
   }
 
   success() {
-    this.bools += 1;
-    console.log('success');
+    this.score += 1;
+    this.unitSpeed += 1;
   }
 }

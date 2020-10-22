@@ -93,6 +93,9 @@ export class NgLogo implements NgCanvasElement {
           this.unitY < this.deltaY + CAT_SIZE
         ) {
           this.deltaY = -200;
+          this.x =
+            Math.ceil(Math.random() * this.parent.element.width) - CAT_SIZE;
+          this.step += 0.5;
           this.callbackFunc.success();
         }
       }
