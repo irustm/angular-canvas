@@ -1,9 +1,17 @@
 # AngularCanvas
 
-Angular canvas renderer with support custom elements.
+🎨 Angular canvas renderer with support DefaultDomRenderer.
 
+Features:
+- **Custom canvas elements**
+- **Support redraw** in one canvas context
+- **Support listeners** inputs and outputs
+- **Easily migrate** your code on canvas to component approach
+- EmulatedEncapsulation by default in canvas component
 
-# Getting started
+[Demo](https://github.com/irustm/angular-canvas)
+
+# Getting start
 
 `npm i --save angular-canvas`
 
