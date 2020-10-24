@@ -21,6 +21,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
+    "build:demo": "ng build --prod --output-path demo --base-href /angular-canvas/demo/",
     "build:lib": "ng build angular-canvas-lib --prod",
     "test": "ng test",
     "lint": "ng lint",
