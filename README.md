@@ -84,6 +84,7 @@ component.html
 
 Game example:
 
+<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/game-example.png?raw=true">
 
 
 # API
