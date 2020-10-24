@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { DomTestComponent } from './dom-test/dom-test/dom-test.component';
 import { RouterModule } from '@angular/router';
+import { GameModule } from './game/game.module';
 
 @NgModule({
   declarations: [AppComponent, DomTestComponent],
   imports: [
     BrowserModule,
+    GameModule,
     RouterModule.forRoot([
       {
         path: '',
@@ -20,11 +22,6 @@ import { RouterModule } from '@angular/router';
           import('./graph-example-module/graph-example.module').then(
             (m) => m.GraphExampleModule
           ),
-      },
-      {
-        path: 'game',
-        loadChildren: () =>
-          import('./game/game.module').then((m) => m.GameModule),
       },
     ]),
   ],

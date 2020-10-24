@@ -21,6 +21,7 @@ import { NgLogo } from './elements/angular-logo.element';
       },
     ]),
   ],
+  exports: [GameContainerComponent],
   schemas: [NO_ERRORS_SCHEMA],
 })
 export class GameModule {}
