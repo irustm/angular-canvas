@@ -9,7 +9,7 @@ Features:
 - **Easily migrate** your code on canvas to component approach
 - EmulatedEncapsulation by default in canvas component
 
-[Demo](https://github.com/irustm/angular-canvas)
+[Demo](https://irustm.github.io/angular-canvas/)
 
 # Getting start
 
