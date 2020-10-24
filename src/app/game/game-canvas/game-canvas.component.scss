@@ -6,6 +6,47 @@
   position: absolute;
   z-index: 1;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 18pt;
   padding: 20px;
+}
+.main-menu {
+  position: absolute;
+  z-index: 11;
+  top: calc(100% / 3);
+  height: calc(100% / 3);
+  width: 100%;
+}
+
+.menu-container {
+  margin: auto;
+  min-width: 400px;
+  min-height: 200px;
+  text-align: center;
+
+  .menu-title{
+    font-size: 38pt;
+    margin: 14px;
+    color: #dc73ce;
+  }
+
+  .score{
+    font-size: 25pt;
+  }
+
+  button{
+    margin: 20px;
+    font-size: 20pt;
+    background-color: #fffca4;
+    padding: 4pt 10pt;
+  }
+}
+
+
+
+.links {
+  margin-top: 25px;
+
+  a{
+    margin: 5px;
+  }
 }

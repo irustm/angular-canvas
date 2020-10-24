@@ -332,7 +332,7 @@ export class CanvasRenderer implements Renderer2 {
 
   setValue(node: any, value: string): void {
     if (node.setValue) {
-      node.setValue && node.setValue(value);
+      node.setValue(value);
     } else {
       node.nodeValue = value;
     }

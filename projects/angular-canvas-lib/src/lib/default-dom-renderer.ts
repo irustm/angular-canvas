@@ -71,7 +71,6 @@ export class DefaultDomRenderer2 implements Renderer2 {
   }
 
   createText(value: string): any {
-    console.log(value);
     return document.createTextNode(value);
   }
 

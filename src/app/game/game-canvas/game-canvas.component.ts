@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -8,6 +9,9 @@ import {
 import { CanvasComponent } from '../../../../projects/angular-canvas-lib/src/lib/decorators/canvas-component';
 import { interval, Subscription } from 'rxjs';
 import { NgCat } from '../elements';
+
+const DEFAULT_UNIT_SPEED = 4;
+const DEFAULT_UNIT_SIZE = 6;
 
 @CanvasComponent
 @Component({
@@ -22,12 +26,18 @@ export class GameCanvasComponent implements OnInit {
   public unitSize = 6;
   public unitSpeed = 4;
   public catSpriteIndex = 0;
+
+  public logoX = 250;
+
   public revert = false;
   public rightPressed = false;
   public leftPressed = false;
   public downPressed = false;
 
   public score = 0;
+  public finishScore = 0;
+
+  public isPlayed = false;
 
   @ViewChild('cat') cat: ElementRef<NgCat>;
 
@@ -65,7 +75,10 @@ export class GameCanvasComponent implements OnInit {
 
   private subscription = new Subscription();
 
-  constructor(private readonly elementRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private readonly elementRef: ElementRef<HTMLElement>,
+    private readonly cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     let d = 1;
@@ -95,11 +108,19 @@ export class GameCanvasComponent implements OnInit {
   }
 
   failed() {
+    this.isPlayed = false;
+    this.finishScore = this.score;
     this.score = 0;
   }
 
   success() {
     this.score += 1;
     this.unitSpeed += 1;
+  }
+
+  startPlay() {
+    this.isPlayed = true;
+    this.logoX = 270;
+    this.cdr.detectChanges();
   }
 }

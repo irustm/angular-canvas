@@ -58,16 +58,19 @@ export class NgCanvas {
   appendChild(newChild: NgCanvasElement): void {
     this.componentSet.add(newChild);
     this.componentsDrawings = getArrayDrawingComponents(this.componentSet);
+    this.drawAll();
   }
 
   removeChild(oldChild: NgCanvasElement): void {
     this.componentSet.delete(oldChild);
     this.componentsDrawings = getArrayDrawingComponents(this.componentSet);
+    this.drawAll();
   }
 
   insertBefore(newChild: any, refChild: any): void {
     this.componentSet.add(newChild);
     this.componentsDrawings = getArrayDrawingComponents(this.componentSet);
+    this.drawAll();
   }
 
   removeAttribute(name: string, namespace?: string | null): void {}
