@@ -73,21 +73,33 @@ export class NgCanvas {
     this.drawAll();
   }
 
-  removeAttribute(name: string, namespace?: string | null): void {}
+  removeAttribute(name: string, namespace?: string | null): void {
+    this.element.removeAttribute(name);
+  }
 
-  removeClass(name: string): void {}
+  removeClass(name: string): void {
+    this.element.classList.remove(name);
+  }
 
-  removeStyle(style: string, flags?: RendererStyleFlags2): void {}
+  removeStyle(style: string, flags?: RendererStyleFlags2): void {
+    // Not supported
+  }
 
   setNgAttribute(name: string, value: string, namespace?: string | null): void {
     this.element.setAttribute(name, value);
   }
 
-  setNgProperty(name: string, value: any): void {}
+  setNgProperty(name: string, value: any): void {
+    // Not supported
+  }
 
-  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {}
+  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {
+    // Not supported
+  }
 
-  setValue(value: any): void {}
+  setValue(value: any): void {
+    // Not supported
+  }
 
   drawAll(clear?: boolean): void {
     this.ngZone.runOutsideAngular(() => {

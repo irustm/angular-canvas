@@ -23,8 +23,8 @@ export class GameCanvasComponent implements OnInit {
   public startUnitY = 10;
   public startUnitX = 10;
   public unitX = 10;
-  public unitSize = 6;
-  public unitSpeed = 4;
+  public unitSize = DEFAULT_UNIT_SIZE;
+  public unitSpeed = DEFAULT_UNIT_SPEED;
   public catSpriteIndex = 0;
 
   public logoX = 250;
@@ -120,7 +120,7 @@ export class GameCanvasComponent implements OnInit {
 
   startPlay() {
     this.isPlayed = true;
-    this.logoX = 270;
+    this.unitSpeed = DEFAULT_UNIT_SPEED;
     this.cdr.detectChanges();
   }
 }
