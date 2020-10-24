@@ -16,7 +16,10 @@ import { CanvasElement, NgCanvasElement, NgCanvas } from 'angular-canvas';
   selector: 'graph-line'
 })
 export class GraphLineElement implements NgCanvasElement {
-    public parent: NgCanvas; // parent element
+    // parent element  
+    public parent: NgCanvas;
+   
+    // canvas element redraw until all NgCanvasElement needDraw as true
     public needDraw: boolean;
 
     setNgProperty(name: string, value: any): void {
