@@ -1,6 +1,6 @@
 # AngularCanvas
 
-🎨 Angular canvas renderer with support DefaultDomRenderer.
+🎨 Angular canvas renderer with support DefaultDomRenderer. **[Demo](https://irustm.github.io/angular-canvas/)**
 
 Features:
 - **Custom canvas elements**
@@ -9,7 +9,6 @@ Features:
 - **Easily migrate** your code on canvas to component approach
 - EmulatedEncapsulation by default in canvas component
 
-[Demo](https://irustm.github.io/angular-canvas/)
 
 # Getting start
 
@@ -89,12 +88,14 @@ component.html
 </canvas>
 
 ```
-
+**[CODE](https://github.com/irustm/angular-canvas/tree/master/src/app/graph-example-module)**
 <img src ="https://github.com/irustm/angular-canvas/blob/master/assets/graph-example.png?raw=true">
 
 
 Game example:
 
+**[Demo](https://irustm.github.io/angular-canvas/)**
+**[CODE](https://github.com/irustm/angular-canvas/tree/master/src/app/game)**
 <img src ="https://github.com/irustm/angular-canvas/blob/master/assets/game-example.png?raw=true">
 
 
