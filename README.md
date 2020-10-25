@@ -94,7 +94,7 @@ component.html
 
 Game example:
 
-**[Demo](https://irustm.github.io/angular-canvas/)**
+**[Demo](https://irustm.github.io/angular-canvas/)** | 
 **[CODE](https://github.com/irustm/angular-canvas/tree/master/src/app/game)**
 <img src ="https://github.com/irustm/angular-canvas/blob/master/assets/game-example.png?raw=true">
 
