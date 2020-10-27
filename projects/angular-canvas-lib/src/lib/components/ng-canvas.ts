@@ -14,13 +14,38 @@ export class NgCanvas {
   public readonly context: CanvasRenderingContext2D;
   public readonly element: HTMLCanvasElement;
 
+  public get width(): number {
+    return this._width;
+  }
+
+  public get height(): number {
+    return this._height;
+  }
+
   private requestId: number;
+  private _width: number;
+  private _height: number;
 
   public set parent(element) {
     // @ts-ignore
     this.resizeObserver = new ResizeObserver(([entry]) => {
-      this.element.width = entry.contentRect.width;
-      this.element.height = entry.contentRect.height;
+      const dpr: number = window.devicePixelRatio || 1;
+
+      const width = entry.contentRect.width;
+      const height = entry.contentRect.height;
+
+      this._width = width;
+      this._height = height;
+
+      this.element.width = width * dpr;
+      this.element.height = height * dpr;
+      this.element.style.width = width + 'px';
+      this.element.style.height = height + 'px';
+
+      if (dpr !== 1) {
+        this.context.scale(dpr, dpr);
+      }
+
       this.drawAll(false);
     });
 
@@ -104,9 +129,10 @@ export class NgCanvas {
   drawAll(clear?: boolean): void {
     this.ngZone.runOutsideAngular(() => {
       this.requestId && window.cancelAnimationFrame(this.requestId);
-      this.requestId = window.requestAnimationFrame((time) =>
-        this.draw(time, clear)
-      );
+      this.requestId = window.requestAnimationFrame((time) => {
+        this.draw(time, clear);
+        this.requestId = null;
+      });
     });
   }
 
