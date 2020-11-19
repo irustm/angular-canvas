@@ -25,8 +25,11 @@ export class NgCanvas {
   private requestId: number;
   private _width: number;
   private _height: number;
+  private _parentElement: HTMLCanvasElement;
 
   public set parent(element) {
+    this._parentElement = element;
+
     // @ts-ignore
     this.resizeObserver = new ResizeObserver(([entry]) => {
       const dpr: number = window.devicePixelRatio || 1;
@@ -76,6 +79,16 @@ export class NgCanvas {
     });
   }
 
+  // tslint:disable-next-line:typedef
+  destroy() {
+    this.resizeObserver &&
+      this._parentElement &&
+      this.resizeObserver.unobserve(this._parentElement);
+    this.componentSet.clear();
+    this.componentsDrawings = null;
+    this.element && this.element.remove();
+  }
+
   addClass(name): void {
     this.element.setAttribute('class', name);
   }
@@ -108,6 +121,10 @@ export class NgCanvas {
 
   removeStyle(style: string, flags?: RendererStyleFlags2): void {
     // Not supported
+  }
+
+  setAttribute(name: string, value: string): void {
+    this.element.setAttribute(name, value);
   }
 
   setNgAttribute(name: string, value: string, namespace?: string | null): void {

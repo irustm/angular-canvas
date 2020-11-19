@@ -3,7 +3,7 @@
   <cactus></cactus>
 </canvas>
 
-<canvas>
+<canvas *ngIf="isPlayed">
   <cat
     #cat
     [x]="startUnitX"

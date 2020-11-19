@@ -224,7 +224,12 @@ export class CanvasRenderer implements Renderer2 {
   insertBefore(parent: NgCanvasElement, newChild: any, refChild: any): void {
     if (parent && parent.insertBefore) {
       newChild.parent = parent;
-      parent.insertBefore(newChild, refChild);
+
+      if (newChild instanceof NgCanvas) {
+        parent.insertBefore((newChild as NgCanvas).element, refChild);
+      } else {
+        parent.insertBefore(newChild, refChild);
+      }
     }
   }
 
