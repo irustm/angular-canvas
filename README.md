@@ -99,6 +99,45 @@ Game example:
 <img src ="https://github.com/irustm/angular-canvas/blob/master/assets/game-example.png?raw=true">
 
 
+## How to integrate with BrowserAnimationsModule?
+
+Create renderer factory and provide in your app.module:
+```ts
+import { EventManager, ɵDomSharedStylesHost as DomSharedStylesHost } from "@angular/platform-browser";
+import { ɵAnimationEngine as AnimationEngine } from "@angular/animations/browser";
+import { ɵAnimationRendererFactory as AnimationRendererFactory } from "@angular/platform-browser/animations";
+import { CanvasDomRendererFactory } from "angular-canvas";
+
+export function canvasAnimationsFactory(
+    eventManager: EventManager,
+    domSharedStylesHost: DomSharedStylesHost,
+    app_id,
+    ngZone: NgZone,
+    animationEngine: AnimationEngine
+) {
+    // register elements this
+    forwardRef(() => {
+        return [GraphLineElement, ...];
+    });
+
+    const canvasRenderer = new CanvasDomRendererFactory(eventManager, domSharedStylesHost, app_id, ngZone);
+    return new AnimationRendererFactory(canvasRenderer, animationEngine, ngZone);
+}
+
+// in app.module.ts:
+...
+imports: [
+  BrowserAnimationModule
+],
+providers: [
+        {
+            provide: RendererFactory2,
+            useFactory: canvasAnimationsFactory,
+            deps: [EventManager, DomSharedStylesHost, APP_ID, NgZone, AnimationEngine]
+        }
+    ],
+```
+
 # API
 
 `NgCanvas` - main component with selector `canvas`
