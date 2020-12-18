@@ -213,6 +213,9 @@ export class CanvasRenderer implements Renderer2 {
     if (parent) {
       parent.removeChild(oldChild);
     }
+    if (oldChild && oldChild.parent instanceof NgCanvas) {
+      oldChild.parent.removeChild(oldChild);
+    }
   }
 
   createComment(value: string): any {

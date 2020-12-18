@@ -34,8 +34,13 @@ export class NgCanvas {
     this.resizeObserver = new ResizeObserver(([entry]) => {
       const dpr: number = window.devicePixelRatio || 1;
 
-      const width = entry.contentRect.width;
-      const height = entry.contentRect.height;
+      let width = entry.contentRect.width;
+      let height = entry.contentRect.height;
+
+      if (width && height) {
+        width = parseInt(width, 10);
+        height = parseInt(height, 10);
+      }
 
       this._width = width;
       this._height = height;
@@ -111,6 +116,10 @@ export class NgCanvas {
     this.drawAll();
   }
 
+  recalculateElementsDraw(): void {
+    this.componentsDrawings = getArrayDrawingComponents(this.componentSet);
+  }
+
   removeAttribute(name: string, namespace?: string | null): void {
     this.element.removeAttribute(name);
   }
@@ -162,14 +171,21 @@ export class NgCanvas {
 
     let needDraw = false;
 
-    for (let i = 0; i < this.componentsDrawings.length; i++) {
-      this.componentsDrawings[i].draw(context, time);
-      needDraw = needDraw || this.componentsDrawings[i].needDraw;
-    }
+    const elementsCount =
+      this.componentsDrawings && this.componentsDrawings.length;
 
-    if (needDraw) {
-      this.requestId && window.cancelAnimationFrame(this.requestId);
-      this.requestId = window.requestAnimationFrame((time) => this.draw(time));
+    if (elementsCount) {
+      for (let i = 0; i < elementsCount; i++) {
+        this.componentsDrawings[i].draw(context, time);
+        needDraw = needDraw || this.componentsDrawings[i].needDraw;
+      }
+
+      if (needDraw) {
+        this.requestId && window.cancelAnimationFrame(this.requestId);
+        this.requestId = window.requestAnimationFrame((time) =>
+          this.draw(time)
+        );
+      }
     }
   }
 }
