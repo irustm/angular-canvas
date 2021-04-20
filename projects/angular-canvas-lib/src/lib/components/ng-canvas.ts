@@ -1,5 +1,6 @@
 import { NgCanvasElement } from './ng-canvas-element';
 import { NgZone, RendererStyleFlags2 } from '@angular/core';
+import { CanvasRenderConfigModel } from '../tokens/canvas-resize-obserer-enable-token';
 
 function getArrayDrawingComponents(
   set: Set<NgCanvasElement>
@@ -42,19 +43,29 @@ export class NgCanvas {
         height = parseInt(height, 10);
       }
 
-      this._width = width;
-      this._height = height;
+      let resizeDetected = false;
 
-      this.element.width = width * dpr;
-      this.element.height = height * dpr;
-      this.element.style.width = width + 'px';
-      this.element.style.height = height + 'px';
-
-      if (dpr !== 1) {
-        this.context.scale(dpr, dpr);
+      if (this._width !== width) {
+        this._width = width;
+        this.element.width = width * dpr;
+        this.element.style.width = width + 'px';
+        resizeDetected = true;
       }
 
-      this.drawAll(false);
+      if (this._height !== height) {
+        this._height = height;
+        this.element.height = height * dpr;
+        this.element.style.height = height + 'px';
+        resizeDetected = true;
+      }
+
+      if (resizeDetected) {
+        if (dpr !== 1) {
+          this.context.scale(dpr, dpr);
+        }
+
+        this.drawWithoutRequestAnimation();
+      }
     });
 
     this.resizeObserver.observe(element);
@@ -74,10 +85,16 @@ export class NgCanvas {
   // @ts-ignore
   private resizeObserver: ResizeObserver;
 
-  constructor(private readonly ngZone: NgZone) {
+  constructor(
+    private readonly ngZone: NgZone,
+    private readonly config: CanvasRenderConfigModel
+  ) {
     this.element = document.createElement('canvas');
     this.element.style.position = 'absolute';
     this.context = this.element.getContext('2d');
+
+    this._height = this.element.height;
+    this._width = this.element.width;
 
     this.ngZone.runOutsideAngular(() => {
       window.requestAnimationFrame((time) => this.draw(time));
@@ -162,11 +179,18 @@ export class NgCanvas {
     });
   }
 
+  private drawWithoutRequestAnimation(): void {
+    this.ngZone.runOutsideAngular(() => {
+      this.draw(0, false);
+      this.requestId = null;
+    });
+  }
+
   // @ts-ignore
-  draw(time: number, clear: boolean = true): void {
+  draw(time: number, clear = true): void {
     const context = this.context;
     if (clear) {
-      context.clearRect(0, 0, this.element.width, this.element.height);
+      context.clearRect(0, 0, this.width, this.height);
     }
 
     let needDraw = false;

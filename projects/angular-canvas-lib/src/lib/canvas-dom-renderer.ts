@@ -1,4 +1,5 @@
 import {
+  Inject,
   Injectable,
   NgZone,
   Renderer2,
@@ -9,8 +10,10 @@ import {
 } from '@angular/core';
 import { NgCanvasElement } from './components/ng-canvas-element';
 import { NgCanvas } from './components/ng-canvas';
-import { EventManager } from '@angular/platform-browser';
-import { ɵDomSharedStylesHost as DomSharedStylesHost } from '@angular/platform-browser';
+import {
+  EventManager,
+  ɵDomSharedStylesHost as DomSharedStylesHost,
+} from '@angular/platform-browser';
 import {
   DefaultDomRenderer2,
   EmulatedEncapsulationDomRenderer2,
@@ -23,6 +26,10 @@ import {
   shimHostAttribute,
 } from './renderer-utils';
 import { getMetadataArgsStorage } from './metadata/metadata-storage';
+import {
+  CanvasRenderConfig,
+  CanvasRenderConfigModel,
+} from './tokens/canvas-resize-obserer-enable-token';
 
 @Injectable()
 export class CanvasDomRendererFactory implements RendererFactory2 {
@@ -33,7 +40,9 @@ export class CanvasDomRendererFactory implements RendererFactory2 {
     private readonly eventManager: EventManager,
     private readonly sharedStylesHost: DomSharedStylesHost,
     private readonly appId: string,
-    private readonly ngZone: NgZone
+    private readonly ngZone: NgZone,
+    @Inject(CanvasRenderConfig)
+    private readonly canvasConfig: CanvasRenderConfigModel
   ) {
     this.defaultRenderer = new DefaultDomRenderer2(eventManager);
   }
@@ -55,7 +64,8 @@ export class CanvasDomRendererFactory implements RendererFactory2 {
           this.sharedStylesHost,
           type,
           this.appId,
-          this.ngZone
+          this.ngZone,
+          this.canvasConfig
         );
         this.rendererByCompId.set(type.id, renderer);
       }
@@ -78,7 +88,6 @@ export class CanvasDomRendererFactory implements RendererFactory2 {
         (renderer as EmulatedEncapsulationDomRenderer2).applyToHost(element);
         return renderer;
       }
-      case ViewEncapsulation.Native:
       case ViewEncapsulation.ShadowDom:
         return new ShadowDomRenderer(
           this.eventManager,
@@ -112,7 +121,8 @@ export class CanvasRenderer implements Renderer2 {
     sharedStylesHost: DomSharedStylesHost,
     private component: RendererType2,
     appId: string,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private config
   ) {
     const styles = flattenStyles(
       appId + '-' + component.id,
@@ -136,7 +146,7 @@ export class CanvasRenderer implements Renderer2 {
     if (Component) {
       return new Component();
     } else if (name === 'canvas') {
-      const canvas = new NgCanvas(this.ngZone);
+      const canvas = new NgCanvas(this.ngZone, this.config);
       canvas.element.setAttribute(this.contentAttr, '');
       return canvas;
     } else {
@@ -307,7 +317,7 @@ export class CanvasRenderer implements Renderer2 {
         el.setAttribute(name, value);
       }
     } else {
-      el.setAttribute(name, value);
+      el.setAttribute && el.setAttribute(name, value);
     }
   }
 
@@ -328,7 +338,7 @@ export class CanvasRenderer implements Renderer2 {
           // tslint:disable-next-line:no-bitwise
           style,
           value,
-          !!(flags & RendererStyleFlags2.Important) ? 'important' : ''
+          flags & RendererStyleFlags2.Important ? 'important' : ''
         );
       } else {
         el.style[style] = value;
