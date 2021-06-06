@@ -30,6 +30,13 @@ export class NgCanvas {
 
   public set parent(element) {
     this._parentElement = element;
+    this.subResizeEvent();
+  }
+
+  private subResizeEvent() {
+    this._parentElement &&
+      this.resizeObserver &&
+      this.resizeObserver.unobserve(this._parentElement);
 
     // @ts-ignore
     this.resizeObserver = new ResizeObserver(([entry]) => {
@@ -68,7 +75,16 @@ export class NgCanvas {
       }
     });
 
-    this.resizeObserver.observe(element);
+    this.resizeObserver.observe(this._parentElement);
+  }
+
+  public resetCanvasSize() {
+    const dpr: number = window.devicePixelRatio || 1;
+    this.element.width = this._width * dpr;
+    this.element.style.width = this._width + 'px';
+
+    this.element.height = this._height * dpr;
+    this.element.style.height = this._height + 'px';
   }
 
   // tslint:disable-next-line:typedef

@@ -317,7 +317,7 @@ export class CanvasRenderer implements Renderer2 {
         el.setAttribute(name, value);
       }
     } else {
-      el.setAttribute && el.setAttribute(name, value);
+      el.setAttribute(name, value);
     }
   }
 

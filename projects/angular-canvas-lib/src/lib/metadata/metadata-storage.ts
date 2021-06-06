@@ -3,14 +3,18 @@ import { NgCanvasElement } from '../components/ng-canvas-element';
 export type Constructable<T> = new () => T;
 export type NgComponentClass = Constructable<NgCanvasElement>;
 
-const global: any = {};
+declare global {
+  interface Window {
+    canvasRendererMetadataArgsStorage: MetadataArgsStorage;
+  }
+}
 
 export function getMetadataArgsStorage(): MetadataArgsStorage {
-  if (!(global as any).canvasRendererMetadataArgsStorage) {
-    (global as any).canvasRendererMetadataArgsStorage = new MetadataArgsStorage();
+  if (!window.canvasRendererMetadataArgsStorage) {
+    window.canvasRendererMetadataArgsStorage = new MetadataArgsStorage();
   }
 
-  return (global as any).canvasRendererMetadataArgsStorage;
+  return window.canvasRendererMetadataArgsStorage;
 }
 
 export class MetadataArgsStorage {
