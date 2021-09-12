@@ -253,6 +253,10 @@ export class CanvasRenderer implements Renderer2 {
   ): () => void {
     const callbackFunc = (e: any) => callback.call(target, e);
 
+    if (target instanceof NgCanvas) {
+      target = target.element;
+    }
+
     target.addEventListener(eventName, callbackFunc);
 
     return () => target.removeEventListener(eventName, callbackFunc);

@@ -132,12 +132,14 @@ export class NgCanvas {
   }
 
   appendChild(newChild: NgCanvasElement): void {
+    newChild.onInit && newChild.onInit(this.context);
     this.componentSet.add(newChild);
     this.componentsDrawings = getArrayDrawingComponents(this.componentSet);
     this.drawAll();
   }
 
   removeChild(oldChild: NgCanvasElement): void {
+    oldChild.onDestroy && oldChild.onDestroy(this.context);
     this.componentSet.delete(oldChild);
     this.componentsDrawings = getArrayDrawingComponents(this.componentSet);
     this.drawAll();
