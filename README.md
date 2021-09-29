@@ -13,7 +13,7 @@ Features:
 - Support animation canvas elements
 
 DEMO: [Game](https://irustm.github.io/angular-canvas/#/game) |
-[Graph](https://irustm.github.io/angular-canvas/#/graph)
+[Graph](https://irustm.github.io/angular-canvas/#/demo)
 
 # Getting start
 
