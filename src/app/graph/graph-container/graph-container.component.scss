@@ -1,8 +1,18 @@
-:host{
+:host {
   width: 100%;
-  display: flex;
+  font-family: "Arial";
 }
-app-graph-canvas-example{
+
+h4.title {
+  text-align: center;
+}
+
+.description {
+  margin: 10px 0;
+  text-align: center;
+}
+
+app-graph-canvas-example {
   position: relative;
   display: block;
   width: 100%;

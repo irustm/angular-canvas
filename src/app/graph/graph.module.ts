@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { CanvasDomModule } from 'angular-canvas';
 import { RouterModule } from '@angular/router';
 
-import { GraphCanvasExampleComponent } from './graph-canvas/graph-canvas-example.component';
+import { GraphCanvasComponent } from './graph-canvas/graph-canvas.component';
 import { GraphContainerComponent } from './graph-container/graph-container.component';
 
 import { NgText, NgRect, NgLine, NgGraph, NgGrid } from './elements';
 
 // @ts-ignore
 @NgModule({
-  declarations: [GraphCanvasExampleComponent, GraphContainerComponent],
+  declarations: [GraphCanvasComponent, GraphContainerComponent],
   imports: [
     CommonModule,
     CanvasDomModule.forRoot([NgText, NgRect, NgLine, NgGraph, NgGrid]),

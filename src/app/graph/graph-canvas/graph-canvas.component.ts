@@ -1,22 +1,13 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CanvasComponent } from 'angular-canvas';
 
-// tslint:disable-next-line:typedef
-function getNewData() {
-  const data = [];
-  for (let i = 0; i < 1_000; i++) {
-    data.push(Math.random() * 40 + 30);
-  }
-  return data;
-}
-
 @CanvasComponent
 @Component({
   selector: 'app-graph-canvas-example',
-  templateUrl: './graph-canvas-example.component.html',
-  styleUrls: ['./graph-canvas-example.component.scss'],
+  templateUrl: './graph-canvas.component.html',
+  styleUrls: ['./graph-canvas.component.scss'],
 })
-export class GraphCanvasExampleComponent implements OnInit {
+export class GraphCanvasComponent implements OnInit {
   public showData = false;
 
   public data = getNewData();
@@ -49,6 +40,9 @@ export class GraphCanvasExampleComponent implements OnInit {
   @HostListener('mousewheel', ['$event'])
   private onMouseWheel(event: WheelEvent) {
     event.preventDefault();
+
+    this.ctrlPressed = event.ctrlKey;
+
     if (this.ctrlPressed === true) {
       const step = this.step + event.deltaY / 100;
 
@@ -101,4 +95,13 @@ export class GraphCanvasExampleComponent implements OnInit {
       this.rectY = Math.random() * 100;
     }, 1000);
   }
+}
+
+// tslint:disable-next-line:typedef
+function getNewData() {
+  const data = [];
+  for (let i = 0; i < 1_000; i++) {
+    data.push(Math.random() * 40 + 30);
+  }
+  return data;
 }

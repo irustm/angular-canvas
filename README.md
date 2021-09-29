@@ -109,7 +109,7 @@ component.html
 
 Game example:
 
-<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/game-example.png?raw=true">
+<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/game-example2.png?raw=true">
 
 ## How to integrate with BrowserAnimationsModule?
 Create renderer factory and provide in your app.module:
