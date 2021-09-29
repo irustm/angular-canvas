@@ -105,11 +105,13 @@ component.html
 </canvas>
 ```
 
-<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/graph-example.png?raw=true">
+Graph example:
+
+<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/graph-example2.png?raw=true">
 
 Game example:
 
-<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/game-example2.png?raw=true">
+<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/game-example.png?raw=true">
 
 ## How to integrate with BrowserAnimationsModule?
 Create renderer factory and provide in your app.module:
