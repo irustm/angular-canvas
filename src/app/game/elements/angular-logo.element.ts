@@ -81,7 +81,7 @@ export class NgLogo implements NgCanvasElement {
 
     renderMatrix(context, LOGO_MATRIX, COLOR_MAP, SIZE, this.x, this.deltaY);
 
-    this.needDraw = this.deltaY < this.parent.element.height;
+    this.needDraw = this.deltaY < this.parent.height;
 
     if (!this.needDraw && this.callbackFunc.failed) {
       this.deltaY = -200;
@@ -93,8 +93,7 @@ export class NgLogo implements NgCanvasElement {
           this.unitY < this.deltaY + CAT_SIZE
         ) {
           this.deltaY = -200;
-          this.x =
-            Math.ceil(Math.random() * this.parent.element.width) - CAT_SIZE;
+          this.x = Math.ceil(Math.random() * this.parent.width) - CAT_SIZE;
           this.step += 0.5;
           this.callbackFunc.success();
         }

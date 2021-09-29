@@ -17,8 +17,8 @@ export class NgBackground implements NgCanvasElement {
   }
 
   draw(context: CanvasRenderingContext2D, time: number): void {
-    this.width = this.parent.element.width;
-    this.height = this.parent.element.height;
+    this.width = this.parent.width;
+    this.height = this.parent.height;
 
     context.fillStyle = '#abddff';
     context.fillRect(0, 0, this.width, this.height / 1.5);

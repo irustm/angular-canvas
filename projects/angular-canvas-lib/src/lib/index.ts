@@ -6,3 +6,4 @@ export * from '../lib/canvas-dom.module';
 export * from '../lib/metadata/metadata-storage';
 export * from '../lib/components/ng-canvas-element';
 export * from '../lib/components/ng-canvas';
+export * from '../lib/tokens/canvas-resize-obserer-enable-token';

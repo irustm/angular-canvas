@@ -94,7 +94,7 @@ export class DefaultDomRenderer2 implements Renderer2 {
     selectorOrNode: string | any,
     preserveContent?: boolean
   ): any {
-    let el: any =
+    const el: any =
       typeof selectorOrNode === 'string'
         ? document.querySelector(selectorOrNode)
         : selectorOrNode;
@@ -166,12 +166,14 @@ export class DefaultDomRenderer2 implements Renderer2 {
     flags: RendererStyleFlags2
   ): void {
     // tslint:disable-next-line:no-bitwise
-    if (flags & RendererStyleFlags2.DashCase) {
+    if (
+      flags &
+      (RendererStyleFlags2.DashCase | RendererStyleFlags2.Important)
+    ) {
       el.style.setProperty(
-        // tslint:disable-next-line:no-bitwise
         style,
         value,
-        !!(flags & RendererStyleFlags2.Important) ? 'important' : ''
+        flags & RendererStyleFlags2.Important ? 'important' : ''
       );
     } else {
       el.style[style] = value;

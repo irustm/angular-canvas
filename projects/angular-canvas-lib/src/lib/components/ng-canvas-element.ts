@@ -6,6 +6,11 @@ export interface NgCanvasElement {
   classList?: DOMTokenList;
   needDraw?: boolean;
   parent: NgCanvas;
+
+  onInit?(context: CanvasRenderingContext2D): void;
+
+  onDestroy?(context: CanvasRenderingContext2D): void;
+
   draw(context: CanvasRenderingContext2D, time?: number): void;
 
   appendChild?(newChild: any): void;
