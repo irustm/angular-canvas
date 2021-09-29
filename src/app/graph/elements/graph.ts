@@ -1,11 +1,11 @@
-import {RendererStyleFlags2} from '@angular/core';
-import {NgCanvas, NgCanvasElement, CanvasElement} from 'angular-canvas';
+import { RendererStyleFlags2 } from '@angular/core';
+import { NgCanvas, NgCanvasElement, CanvasElement } from 'angular-canvas';
 
-const STEP = 20;
+const STEP = 5;
 const SMOOTH = 30;
 
 @CanvasElement({
-  selector: 'graph-line'
+  selector: 'graph-line',
 })
 export class NgGraph implements NgCanvasElement {
   public parent: NgCanvas;
@@ -14,7 +14,7 @@ export class NgGraph implements NgCanvasElement {
   // NG Attributes
   public data: number[];
   public deltaX = 0;
-  public lineWidth = 2;
+  public lineWidth = 1;
   public min = 0;
   public max = 100;
 
@@ -28,31 +28,6 @@ export class NgGraph implements NgCanvasElement {
   private waypointsData: number[][];
 
   private animationBlock = 1;
-
-  appendChild(newChild: any): void {
-  }
-  addClass(name): void {
-  }
-
-  insertBefore(newChild: any, refChild: any): void {
-  }
-
-  removeAttribute(name: string, namespace?: string | null): void {
-  }
-
-  removeChild(oldChild: any): void {
-    this.parent.removeChild(oldChild);
-  }
-
-  removeClass(name: string): void {
-  }
-
-  removeStyle(style: string, flags?: RendererStyleFlags2): void {
-  }
-
-  setNgAttribute(name: string, value: string, namespace?: string | null): void {
-    this[name] = value;
-  }
 
   setNgProperty(name: string, value: any): void {
     if (name === 'data') {
@@ -72,19 +47,16 @@ export class NgGraph implements NgCanvasElement {
     this.parent.drawAll();
   }
 
-  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {
-  }
-
-  setValue(): void {
-
-  }
+  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {}
 
   draw(context: CanvasRenderingContext2D): void {
     if (this.data && this.data.length) {
       context.strokeStyle = this.strokeStyle;
       const numberOfBlock = this.animationBlock;
 
-      const index: number = this.waypointsData[numberOfBlock] ? numberOfBlock : this.waypointsData.length - 1;
+      const index: number = this.waypointsData[numberOfBlock]
+        ? numberOfBlock
+        : this.waypointsData.length - 1;
       const currentLines = this.waypointsData[index];
       this.drawAnimate(context, currentLines);
       this.animationBlock++;
@@ -94,13 +66,21 @@ export class NgGraph implements NgCanvasElement {
   }
 
   // tslint:disable-next-line:typedef
-  private drawAnimate(context: CanvasRenderingContext2D, currentLines: number[]) {
+  private drawAnimate(
+    context: CanvasRenderingContext2D,
+    currentLines: number[]
+  ) {
     const deltaX = this.deltaX;
     const step = this.step;
 
     const dxPointsCount = Math.floor(Math.abs(deltaX / step));
-    const viewPointsCount = Math.floor(Math.abs(this.getAxisSize(!this.horizontal) / step));
-    const viewLines = currentLines.slice(dxPointsCount, dxPointsCount + viewPointsCount);
+    const viewPointsCount = Math.floor(
+      Math.abs(this.getAxisSize(!this.horizontal) / step)
+    );
+    const viewLines = currentLines.slice(
+      dxPointsCount,
+      dxPointsCount + viewPointsCount
+    );
 
     const kY = this.getAxisSize(this.horizontal) / (this.max - this.min);
     const horizontal = this.horizontal;
@@ -109,19 +89,20 @@ export class NgGraph implements NgCanvasElement {
     context.beginPath();
 
     for (let i = 0; i < viewLines.length; i++) {
-      const x = deltaX + ((dxPointsCount + i) * step);
-      horizontal ? context.lineTo(x, viewLines[i] * kY) : context.lineTo(viewLines[i] * kY, x);
+      const x = deltaX + (dxPointsCount + i) * step;
+      horizontal
+        ? context.lineTo(x, viewLines[i] * kY)
+        : context.lineTo(viewLines[i] * kY, x);
     }
 
     context.stroke();
   }
 
-
   private getAxisSize(horizontal: boolean) {
     const viewWidth = this.parent.element.width;
     const viewHeight = this.parent.element.height;
 
-    return horizontal ? viewHeight : viewWidth;
+    return (horizontal ? viewHeight : viewWidth) / window.devicePixelRatio || 1;
   }
 }
 
@@ -141,7 +122,7 @@ function calcWaypoints(oldData: number[], newData: number[]) {
     const points = [];
 
     for (let j = 0; j < SMOOTH; j++) {
-      const x = pt0 + dx * j / SMOOTH;
+      const x = pt0 + (dx * j) / SMOOTH;
       points.push(x || 0);
     }
 

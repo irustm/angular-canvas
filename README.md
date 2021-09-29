@@ -12,7 +12,8 @@ Features:
 - Canvas elements support onInit and onDestroy methods
 - Support animation canvas elements
 
-[Demo](https://irustm.github.io/angular-canvas/)
+DEMO: [Game](https://irustm.github.io/angular-canvas/#/game) |
+[Graph](https://irustm.github.io/angular-canvas/#/graph)
 
 # Getting start
 

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { DomTestComponent } from './dom-test/dom-test/dom-test.component';
 import { RouterModule } from '@angular/router';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, DomTestComponent],
@@ -17,9 +18,7 @@ import { RouterModule } from '@angular/router';
       {
         path: 'graph',
         loadChildren: () =>
-          import('./graph-example-module/graph-example.module').then(
-            (m) => m.GraphExampleModule
-          ),
+          import('./graph/graph.module').then((m) => m.GraphModule),
       },
       {
         path: 'game',
@@ -28,7 +27,7 @@ import { RouterModule } from '@angular/router';
       },
     ]),
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

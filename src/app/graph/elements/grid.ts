@@ -1,10 +1,10 @@
-import {RendererStyleFlags2} from '@angular/core';
-import {NgCanvas, NgCanvasElement, CanvasElement} from 'angular-canvas';
+import { RendererStyleFlags2 } from '@angular/core';
+import { NgCanvas, NgCanvasElement, CanvasElement } from 'angular-canvas';
 
 const STEP = 20;
 
 @CanvasElement({
-  selector: 'grid'
+  selector: 'grid',
 })
 export class NgGrid implements NgCanvasElement {
   public parent: NgCanvas;
@@ -20,24 +20,19 @@ export class NgGrid implements NgCanvasElement {
   // Attributes
   public strokeStyle = 'gray';
 
-  appendChild(newChild: any): void {
-  }
+  appendChild(newChild: any): void {}
 
-  insertBefore(newChild: any, refChild: any): void {
-  }
+  insertBefore(newChild: any, refChild: any): void {}
 
-  removeAttribute(name: string, namespace?: string | null): void {
-  }
+  removeAttribute(name: string, namespace?: string | null): void {}
 
   removeChild(oldChild: any): void {
     this.parent.removeChild(oldChild);
   }
 
-  removeClass(name: string): void {
-  }
+  removeClass(name: string): void {}
 
-  removeStyle(style: string, flags?: RendererStyleFlags2): void {
-  }
+  removeStyle(style: string, flags?: RendererStyleFlags2): void {}
 
   setNgAttribute(name: string, value: string, namespace?: string | null): void {
     this[name] = value;
@@ -49,11 +44,9 @@ export class NgGrid implements NgCanvasElement {
     this.parent.drawAll();
   }
 
-  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {
-  }
+  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {}
 
-  setValue(): void {
-  }
+  setValue(): void {}
 
   draw(context: CanvasRenderingContext2D): void {
     const viewWidth = this.parent.element.width;
@@ -88,6 +81,5 @@ export class NgGrid implements NgCanvasElement {
     context.stroke();
   }
 
-  addClass(name): void {
-  }
+  addClass(name): void {}
 }
