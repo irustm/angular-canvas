@@ -1,8 +1,8 @@
-import {RendererStyleFlags2} from '@angular/core';
-import {NgCanvas, NgCanvasElement, CanvasElement} from 'angular-canvas';
+import { RendererStyleFlags2 } from '@angular/core';
+import { NgCanvas, NgCanvasElement, CanvasElement } from 'angular-canvas';
 
 @CanvasElement({
-  selector: 'rect'
+  selector: 'rect',
 })
 export class NgRect implements NgCanvasElement {
   public parent: NgCanvas;
@@ -13,26 +13,20 @@ export class NgRect implements NgCanvasElement {
   public h: number;
   public fillStyle = 'black';
 
-  appendChild(newChild: any): void {
-  }
-  addClass(name): void {
-  }
+  appendChild(newChild: any): void {}
+  addClass(name): void {}
 
-  insertBefore(newChild: any, refChild: any): void {
-  }
+  insertBefore(newChild: any, refChild: any): void {}
 
-  removeAttribute(name: string, namespace?: string | null): void {
-  }
+  removeAttribute(name: string, namespace?: string | null): void {}
 
   removeChild(oldChild: any): void {
     this.parent.removeChild(oldChild);
   }
 
-  removeClass(name: string): void {
-  }
+  removeClass(name: string): void {}
 
-  removeStyle(style: string, flags?: RendererStyleFlags2): void {
-  }
+  removeStyle(style: string, flags?: RendererStyleFlags2): void {}
 
   setNgAttribute(name: string, value: string, namespace?: string | null): void {
     this[name] = value;
@@ -44,12 +38,9 @@ export class NgRect implements NgCanvasElement {
     this.parent.drawAll();
   }
 
-  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {
-  }
+  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {}
 
-  setValue(): void {
-
-  }
+  setValue(): void {}
 
   draw(context: CanvasRenderingContext2D): void {
     context.fillRect(this.x, this.y, this.w, this.h);
