@@ -24,4 +24,4 @@ import { NgText, NgRect, NgLine, NgGraph, NgGrid } from './elements';
   providers: [],
   schemas: [NO_ERRORS_SCHEMA],
 })
-export class GraphModule {}
+export class DemosModule {}

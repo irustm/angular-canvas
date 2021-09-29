@@ -16,9 +16,9 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
         component: AppComponent,
       },
       {
-        path: 'graph',
+        path: 'demo',
         loadChildren: () =>
-          import('./graph/graph.module').then((m) => m.GraphModule),
+          import('./demos/demos.module').then((m) => m.DemosModule),
       },
       {
         path: 'game',
