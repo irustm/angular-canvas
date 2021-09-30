@@ -105,9 +105,13 @@ component.html
 </canvas>
 ```
 
-Graph example:
+How to work renderer:
 
-<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/graph-example2.png?raw=true">
+<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/renderer.png?raw=true">
+
+Demo example:
+
+<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/graph-example3.png?raw=true">
 
 Game example:
 

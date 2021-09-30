@@ -1,9 +1,7 @@
-import {NgCanvasElement} from '../../../../projects/angular-canvas-lib/src/lib/components/ng-canvas-element';
-import {RendererStyleFlags2} from '@angular/core';
-import {NgCanvas, CanvasElement} from 'angular-canvas';
+import { NgCanvas, CanvasElement, NgCanvasElement } from 'angular-canvas';
 
 @CanvasElement({
-  selector: 'text'
+  selector: 'text',
 })
 export class NgText implements NgCanvasElement {
   public parent: NgCanvas;
@@ -14,24 +12,8 @@ export class NgText implements NgCanvasElement {
 
   constructor() {}
 
-  appendChild(newChild: any): void {
-  }
-  addClass(name): void {
-  }
-  insertBefore(newChild: any, refChild: any): void {
-  }
-
-  removeAttribute(name: string, namespace?: string | null): void {
-  }
-
   removeChild(oldChild: any): void {
     this.parent.removeChild(oldChild);
-  }
-
-  removeClass(name: string): void {
-  }
-
-  removeStyle(style: string, flags?: RendererStyleFlags2): void {
   }
 
   setNgAttribute(name: string, value: string, namespace?: string | null): void {
@@ -40,12 +22,6 @@ export class NgText implements NgCanvasElement {
 
   setNgProperty(name: string, value: any): void {
     this[name] = value;
-  }
-
-  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {
-  }
-
-  setValue(value: any): void {
   }
 
   draw(context: CanvasRenderingContext2D): void {

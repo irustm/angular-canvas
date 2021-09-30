@@ -3,21 +3,36 @@ import { CommonModule } from '@angular/common';
 import { CanvasDomModule } from 'angular-canvas';
 import { RouterModule } from '@angular/router';
 
-import { GraphCanvasComponent } from './graph-canvas/graph-canvas.component';
-import { GraphContainerComponent } from './graph-container/graph-container.component';
+import { GraphCanvasComponent } from './components/graph-canvas/graph-canvas.component';
 
-import { NgText, NgRect, NgLine, NgGraph, NgGrid } from './elements';
+import {
+  NgText,
+  NgRect,
+  NgLine,
+  NgGraph,
+  NgGrid,
+  TriangleElement,
+} from './elements';
+import { TriangleComponent } from './components/triangle/triangle.component';
+import { ContainerComponent } from './container/container.component';
 
 // @ts-ignore
 @NgModule({
-  declarations: [GraphCanvasComponent, GraphContainerComponent],
+  declarations: [GraphCanvasComponent, ContainerComponent, TriangleComponent],
   imports: [
     CommonModule,
-    CanvasDomModule.forRoot([NgText, NgRect, NgLine, NgGraph, NgGrid]),
+    CanvasDomModule.forRoot([
+      NgText,
+      NgRect,
+      NgLine,
+      NgGraph,
+      NgGrid,
+      TriangleElement,
+    ]),
     RouterModule.forChild([
       {
         path: '',
-        component: GraphContainerComponent,
+        component: ContainerComponent,
       },
     ]),
   ],

@@ -3,7 +3,7 @@ import { CanvasComponent } from 'angular-canvas';
 
 @CanvasComponent
 @Component({
-  selector: 'app-graph-canvas-example',
+  selector: 'app-graph-canvas',
   templateUrl: './graph-canvas.component.html',
   styleUrls: ['./graph-canvas.component.scss'],
 })
