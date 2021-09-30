@@ -13,7 +13,7 @@ Features:
 - Support animation canvas elements
 
 DEMO: [Game](https://irustm.github.io/angular-canvas/#/game) |
-[Graph](https://irustm.github.io/angular-canvas/#/graph)
+[Graph](https://irustm.github.io/angular-canvas/#/demo)
 
 # Getting start
 
@@ -105,11 +105,17 @@ component.html
 </canvas>
 ```
 
-<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/graph-example.png?raw=true">
+How to work renderer:
+
+<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/renderer.png?raw=true">
+
+Demo example:
+
+<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/graph-example3.png?raw=true">
 
 Game example:
 
-<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/game-example2.png?raw=true">
+<img src ="https://github.com/irustm/angular-canvas/blob/master/assets/game-example.png?raw=true">
 
 ## How to integrate with BrowserAnimationsModule?
 Create renderer factory and provide in your app.module:

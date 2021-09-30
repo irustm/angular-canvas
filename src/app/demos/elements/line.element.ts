@@ -1,8 +1,7 @@
-import {RendererStyleFlags2} from '@angular/core';
-import {NgCanvas, NgCanvasElement, CanvasElement} from 'angular-canvas';
+import { NgCanvas, NgCanvasElement, CanvasElement } from 'angular-canvas';
 
 @CanvasElement({
-  selector: 'line'
+  selector: 'line',
 })
 export class NgLine implements NgCanvasElement {
   public parent: NgCanvas;
@@ -16,26 +15,8 @@ export class NgLine implements NgCanvasElement {
   // Attributes
   public strokeStyle = 'black';
 
-  appendChild(newChild: any): void {
-  }
-
-  addClass(name): void {
-  }
-
-  insertBefore(newChild: any, refChild: any): void {
-  }
-
-  removeAttribute(name: string, namespace?: string | null): void {
-  }
-
   removeChild(oldChild: any): void {
     this.parent.removeChild(oldChild);
-  }
-
-  removeClass(name: string): void {
-  }
-
-  removeStyle(style: string, flags?: RendererStyleFlags2): void {
   }
 
   setNgAttribute(name: string, value: string, namespace?: string | null): void {
@@ -46,12 +27,6 @@ export class NgLine implements NgCanvasElement {
   setNgProperty(name: string, value: any): void {
     this[name] = value;
     this.parent.drawAll();
-  }
-
-  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {
-  }
-
-  setValue(): void {
   }
 
   draw(context: CanvasRenderingContext2D): void {

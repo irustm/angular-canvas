@@ -1,0 +1,12 @@
+<div class="canvas-container">
+  <canvas>
+    <triangle
+      [x]="mouseX"
+      [y]="mouseY"
+      (hovered)="hover(true)"
+      (unhovered)="hover(false)"
+    ></triangle>
+  </canvas>
+</div>
+
+<div *ngIf="isHovered" class="hovered-text">Hover: true</div>

@@ -1,4 +1,3 @@
-import { RendererStyleFlags2 } from '@angular/core';
 import { NgCanvas, NgCanvasElement, CanvasElement } from 'angular-canvas';
 
 const STEP = 20;
@@ -20,19 +19,9 @@ export class NgGrid implements NgCanvasElement {
   // Attributes
   public strokeStyle = 'gray';
 
-  appendChild(newChild: any): void {}
-
-  insertBefore(newChild: any, refChild: any): void {}
-
-  removeAttribute(name: string, namespace?: string | null): void {}
-
   removeChild(oldChild: any): void {
     this.parent.removeChild(oldChild);
   }
-
-  removeClass(name: string): void {}
-
-  removeStyle(style: string, flags?: RendererStyleFlags2): void {}
 
   setNgAttribute(name: string, value: string, namespace?: string | null): void {
     this[name] = value;
@@ -43,10 +32,6 @@ export class NgGrid implements NgCanvasElement {
     this[name] = value;
     this.parent.drawAll();
   }
-
-  setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {}
-
-  setValue(): void {}
 
   draw(context: CanvasRenderingContext2D): void {
     const viewWidth = this.parent.element.width;
@@ -80,6 +65,4 @@ export class NgGrid implements NgCanvasElement {
     context.strokeStyle = this.strokeStyle;
     context.stroke();
   }
-
-  addClass(name): void {}
 }

@@ -1,0 +1,14 @@
+.canvas-container {
+  width: 250px;
+  height: 190px;
+  margin: 0 auto;
+  position: relative;
+}
+
+canvas {
+  width: 100%;
+  left: 0;
+}
+.hovered-text {
+  text-align: center;
+}
