@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { CanvasDomRendererFactory } from './canvas-dom-renderer';
 import {
   EventManager,
-  ɵDomSharedStylesHost as DomSharedStylesHost,
+  ɵSharedStylesHost as DomSharedStylesHost,
 } from '@angular/platform-browser';
 import { NgComponentClass } from './metadata/metadata-storage';
 

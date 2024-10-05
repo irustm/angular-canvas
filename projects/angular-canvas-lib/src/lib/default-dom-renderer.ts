@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import {
   EventManager,
-  ɵDomSharedStylesHost as DomSharedStylesHost,
+  ɵSharedStylesHost as DomSharedStylesHost,
 } from '@angular/platform-browser';
 import {
   flattenStyles,
@@ -42,6 +42,19 @@ function decoratePreventDefault(eventHandler) {
 
     return undefined;
   };
+}
+
+function resolveElementFromTarget(target: 'window' | 'document' | 'body' | any): any {
+  switch (target) {
+    case 'body':
+      return document.body;
+    case 'document':
+      return document;
+    case 'window':
+      return window;
+    default:
+      return target;
+  }
 }
 
 export class DefaultDomRenderer2 implements Renderer2 {
@@ -208,18 +221,10 @@ export class DefaultDomRenderer2 implements Renderer2 {
   ): () => void {
     // tslint:disable-next-line:no-unused-expression
     NG_DEV_MODE && checkNoSyntheticProp(event, 'listener');
-    if (typeof target === 'string') {
-      return <() => void>(
-        this.eventManager.addGlobalEventListener(
-          target,
-          event,
-          decoratePreventDefault(callback)
-        )
-      );
-    }
+    const element = resolveElementFromTarget(target);
     return (<() => void>(
       this.eventManager.addEventListener(
-        target,
+        element,
         event,
         decoratePreventDefault(callback)
       )
