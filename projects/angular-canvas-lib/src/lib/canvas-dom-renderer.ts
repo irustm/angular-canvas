@@ -12,7 +12,7 @@ import { NgCanvasElement } from './components/ng-canvas-element';
 import { NgCanvas } from './components/ng-canvas';
 import {
   EventManager,
-  ɵDomSharedStylesHost as DomSharedStylesHost,
+  ɵSharedStylesHost as DomSharedStylesHost,
 } from '@angular/platform-browser';
 import {
   DefaultDomRenderer2,

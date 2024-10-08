@@ -46,8 +46,8 @@ export class NgCanvas {
       let height = entry.contentRect.height;
 
       if (width && height) {
-        width = parseInt(width, 10);
-        height = parseInt(height, 10);
+        width = parseInt(String(width), 10);
+        height = parseInt(String(height), 10);
       }
 
       let resizeDetected = false;
@@ -219,7 +219,7 @@ export class NgCanvas {
     if (elementsCount) {
       for (let i = 0; i < elementsCount; i++) {
         this.componentsDrawings[i].draw(context, time);
-        needDraw = needDraw || this.componentsDrawings[i].needDraw;
+        needDraw = this.componentsDrawings[i]?.needDraw !== undefined ? this.componentsDrawings[i].needDraw : needDraw;
       }
 
       if (needDraw) {
