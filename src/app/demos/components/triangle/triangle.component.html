@@ -9,4 +9,6 @@
   </canvas>
 </div>
 
-<div *ngIf="isHovered" class="hovered-text">Hover: true</div>
+@if (isHovered) {
+  <div class="hovered-text">Hover: true</div>
+}
