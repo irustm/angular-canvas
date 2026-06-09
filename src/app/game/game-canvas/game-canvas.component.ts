@@ -15,9 +15,10 @@ const DEFAULT_UNIT_SIZE = 6;
 
 @CanvasComponent
 @Component({
-  selector: 'app-game-canvas',
-  templateUrl: './game-canvas.component.html',
-  styleUrls: ['./game-canvas.component.scss'],
+    selector: 'app-game-canvas',
+    templateUrl: './game-canvas.component.html',
+    styleUrls: ['./game-canvas.component.scss'],
+    standalone: false
 })
 export class GameCanvasComponent implements OnInit {
   public startUnitY = 10;

@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/irustm/angular-canvas#readme",
   "peerDependencies": {
-    "@angular/common": "^18.2.7",
-    "@angular/core": "^18.2.7"
+    "@angular/common": "^21.2.16",
+    "@angular/core": "^21.2.16"
   },
   "dependencies": {
     "tslib": "^2.7.0"
