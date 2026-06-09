@@ -3,9 +3,10 @@ import { CanvasComponent } from 'angular-canvas';
 
 @CanvasComponent
 @Component({
-  selector: 'app-triangle',
-  templateUrl: './triangle.component.html',
-  styleUrls: ['./triangle.component.scss'],
+    selector: 'app-triangle',
+    templateUrl: './triangle.component.html',
+    styleUrls: ['./triangle.component.scss'],
+    standalone: false
 })
 export class TriangleComponent {
   public mouseX = 0;

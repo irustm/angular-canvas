@@ -3,9 +3,10 @@ import { CanvasComponent } from 'angular-canvas';
 
 @CanvasComponent
 @Component({
-  selector: 'app-graph-canvas',
-  templateUrl: './graph-canvas.component.html',
-  styleUrls: ['./graph-canvas.component.scss'],
+    selector: 'app-graph-canvas',
+    templateUrl: './graph-canvas.component.html',
+    styleUrls: ['./graph-canvas.component.scss'],
+    standalone: false
 })
 export class GraphCanvasComponent implements OnInit {
   public showData = false;
